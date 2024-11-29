@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import Link from "next/link"
 
 import {
   categories,
@@ -100,7 +101,7 @@ export default function Lesson() {
       <div>
         <div className="flex justify-between">
           <h3 data-testid="course_title" className="mb-6 text-base font-bold">
-            <a className="underline" href={`/kurs/${course?.slug}`}>
+            <a className="underline" href={`/CoursePage/${course?.slug}`}>
               {course?.title}
             </a>
           </h3>

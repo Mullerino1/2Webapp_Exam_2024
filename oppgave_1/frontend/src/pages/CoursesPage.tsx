@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from "react";
+import Layout from "@/components/Layout";
+import Link from "next/link"
 
 import {
   categories,
@@ -10,6 +12,37 @@ import {
 } from "../data/data";
 
 import { useParams, useRouter } from "next/navigation";
+
+const getCourse = async (slug) => {
+    const data = await courses.filter((course) => course.slug === slug);
+    return data?.[0];
+  };
+  
+  const createCourse = async (data) => {
+    await courses.push(data);
+  };
+  
+  const getLesson = async (courseSlug, lessonSlug) => {
+    const data = await courses
+      .flatMap(
+        (course) =>
+          course.slug === courseSlug &&
+          course.lessons.filter((lesson) => lesson.slug === lessonSlug)
+      )
+      .filter(Boolean);
+    return data?.[0];
+  };
+  
+  const getComments = async (lessonSlug) => {
+    const data = await comments.filter(
+      (comment) => comment.lesson.slug === lessonSlug
+    );
+    return data;
+  };
+  
+  const createComment = async (data) => {
+    await comments.push(data);
+  };
 
 
 export default function Courses() {
@@ -31,6 +64,7 @@ export default function Courses() {
   
     return (
       <>
+      <Layout>
         <header className="mt-8 flex items-center justify-between">
           <h2 className="mb-6 text-xl font-bold" data-testid="title">
             Alle kurs
@@ -69,7 +103,7 @@ export default function Courses() {
                   className="mb-2 text-base font-bold"
                   data-testid="courses_title"
                 >
-                  <a href={`/kurs/${course.slug}`}>{course.title}</a>
+                  <Link href={`/CoursePage/${course.slug}`}>{course.title}</Link>
                 </h3>
                 <p
                   className="mb-6 text-base font-light"
@@ -77,19 +111,20 @@ export default function Courses() {
                 >
                   {course.description}
                 </p>
-                <a
+                <Link
                   className="font-semibold underline"
                   data-testid="courses_url"
-                  href={`/kurs/${course.slug}`}
+                  href={`/CoursePage/${course.slug}`}
                 >
                   Til kurs
-                </a>
+                </Link>
               </article>
             ))
           ) : (
             <p data-testid="empty">Ingen kurs</p>
           )}
         </section>
+        </Layout>
       </>
     );
   }

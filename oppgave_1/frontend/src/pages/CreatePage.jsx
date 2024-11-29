@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Layout from "@/components/Layout";
 import {
     categories,
     comments,
@@ -141,6 +142,11 @@ export default function Create() {
   
     return (
       <>
+      <div
+      className="mx-auto grid min-h-screen w-full max-w-7xl grid-rows-[auto_minmax(900px,_1fr)_30px]"
+      data-testid="layout"
+    >
+      <Layout>
         <nav className="mb-8 flex w-full">
           <ul data-testid="steps" className="flex w-full">
             {courseCreateSteps?.map((courseStep, index) => (
@@ -438,6 +444,8 @@ export default function Create() {
             </section>
           ) : null}
         </form>
+        </Layout>
+        </div>
       </>
     );
   }

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import Lesson from "./LessonPage";
+import Link from "next/link"
 
 import {
     categories,
     comments,
     courseCreateSteps,
     courses,
-  users,
+    users,
 } from "../data/data";
 
 import { useParams, useRouter } from "next/navigation";
@@ -58,7 +59,7 @@ export default function Course() {
     }, [courseSlug]);
   
     return (
-        <main className="h-full">
+        
       <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
         <aside className="border-r border-slate-200 pr-6">
           <h3 className="mb-4 text-base font-bold">Leksjoner</h3>
@@ -70,14 +71,14 @@ export default function Course() {
                 }`}
                 key={lesson.id}
               >
-                <a
+                <Link
                   data-testid="lesson_url"
                   data-slug={lessonSlug}
                   className="block h-full w-full"
-                  href={`/kurs/${content?.slug}/${lesson.slug}`}
+                  href={`/CoursePage/${content?.slug}/${lesson.slug}`}
                 >
                   {lesson.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -115,6 +116,6 @@ export default function Course() {
           </ul>
         </aside>
       </div>
-      </main>
+     
     );
   }

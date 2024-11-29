@@ -2,14 +2,9 @@
 
 import { useState, useEffect } from "react";
 import SignUp from "./SignUpPage";
-import Create from "./CreatePage";
-// import Courses from "./Courses";
-// import Lesson from "./LessonPage";
-import Lesson from "@/components/Lessons";
-// import Course from "./Course";
-import Link from "next/link"
-import Course from "@/components/Course";
-import Courses from "@/components/Courses";
+import { Navigation } from "@/components/Navigation";
+import Layout from "@/components/Layout";
+
 import {
   categories,
   comments,
@@ -87,31 +82,14 @@ const isValid = (items) => {
       className="mx-auto grid min-h-screen w-full max-w-7xl grid-rows-[auto_minmax(900px,_1fr)_30px]"
       data-testid="layout"
     >
-      <nav className="mt-6 mb-12 flex justify-between">
-        <h1 className="text-lg font-bold uppercase" data-testid="logo">
-          <Link href="/">Mikro LMS</Link>
-        </h1>
-        <ul className="flex gap-8" data-testid="nav">
-          <li className="text-base font-semibold" data-testid="nav_courses">
-            <Link href="CoursesPage">Kurs</Link>
-          </li>
-          <li className="text-base font-semibold" data-testid="nav_new">
-            <Link href="/CreatePage">Nytt kurs</Link>
-          </li>
-        </ul>
-      </nav>
+      <Layout>
+    
+  
       <main className="h-full">
-        <p>Siden er tom</p>
         <SignUp/>
-        {/* <Create/>
-        <Courses/>
-        <Course/>
-        <Lesson/> */}
+        
       </main>
-      <footer className="flex justify-between" data-testid="footer">
-        <p>Mikro LMS AS, 2024</p>
-        <p>99 00 00 00, mail@lms.no</p>
-      </footer>
+      </Layout>
     </div>
   );
 }
