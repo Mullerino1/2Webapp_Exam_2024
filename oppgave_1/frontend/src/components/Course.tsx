@@ -1,4 +1,14 @@
 import { useState, useEffect } from "react";
+import {
+    courses,
+    users,
+  } from "../data/data";
+  import Lesson from "./Lessons";
+
+  const getCourse = async (slug) => {
+    const data = await courses.filter((course) => course.slug === slug);
+    return data?.[0];
+  };
 
 
 export default function Course() {
