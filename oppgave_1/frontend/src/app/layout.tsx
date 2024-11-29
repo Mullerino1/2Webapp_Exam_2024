@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import React from "react";
 
 // TODO: Kommenter ut om du ønsker å bruke .css
 // import '../styles/scss/main.css'
@@ -38,4 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
-import React from "react";
+
