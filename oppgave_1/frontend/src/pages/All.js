@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from 'next/link'
-import { Navigation } from "@/components/Navigation";
+// import Link from 'next/link'
+// import { Navigation } from "@/components/Navigation";
+import Layout from "@/components/Layout";
 import {
   categories,
   comments,
@@ -920,20 +921,22 @@ function Create() {
 
 export default function All() {
   return (
-    <div
-      className="mx-auto grid min-h-screen w-full max-w-7xl grid-rows-[auto_minmax(900px,_1fr)_30px]"
-      data-testid="layout"
-    >
-      <header>
-        <Navigation/>
-      </header>
-      <main className="h-full">
-        <p>Siden er tom</p>
-      </main>
-      <footer className="flex justify-between" data-testid="footer">
-        <p>Mikro LMS AS, 2024</p>
-        <p>99 00 00 00, mail@lms.no</p>
-      </footer>
-    </div>
+    <Layout/>
+    
+    // <div
+    //   className="mx-auto grid min-h-screen w-full max-w-7xl grid-rows-[auto_minmax(900px,_1fr)_30px]"
+    //   data-testid="layout"
+    // >
+    //   <header>
+    //     <Navigation/>
+    //   </header>
+    //   <main className="h-full">
+    //     <p>Siden er tom</p>
+    //   </main>
+    //   <footer className="flex justify-between" data-testid="footer">
+    //     <p>Mikro LMS AS, 2024</p>
+    //     <p>99 00 00 00, mail@lms.no</p>
+    //   </footer>
+    // </div>
   );
 }

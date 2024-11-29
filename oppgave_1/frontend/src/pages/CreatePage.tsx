@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 
-export function Create() {
+export default function Create() {
     const [success, setSuccess] = useState(false);
     const [formError, setFormError] = useState(false);
     const [current, setCurrent] = useState(0);

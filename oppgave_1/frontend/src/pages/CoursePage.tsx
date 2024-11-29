@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function Course() {
+export default function Course() {
     const [content, setContent] = useState(null);
   
     const courseSlug = "javascript-101";
