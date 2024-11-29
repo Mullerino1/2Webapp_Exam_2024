@@ -204,7 +204,7 @@ app.post(lessonslink, async (c) => {
   slug: lesson['slug'],
   title: lesson['title'],
   description: lesson['description'],
-  json :lesson['json']
+  text :lesson['text']
   }
 
   try {
@@ -216,7 +216,7 @@ app.post(lessonslink, async (c) => {
         slug: lessonData.slug,
         title: lessonData.title,
         description: lessonData.description,
-        json: lessonData.json
+        text: lessonData.text
       }
     })
 

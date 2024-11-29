@@ -13,20 +13,19 @@ datasource db {
 model Courses {
   id String @id
   title String
-  string slug
-  string description
-  string category
-
+  slug String
+  description String
   lessons Lessons[] @relation("CourseLessons")
+  category String
 }
 
 model Lessons {
   id String @id
   course_id String
   title String
-  slug String
+  slug String @unique
   description String
-  json text
+  text String?
   
   //https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions
   course Courses @relation(fields: [course_id], references: [id], name: "CourseLessons", onDelete: Cascade)
@@ -39,11 +38,12 @@ model Comments {
   created_by String
   comment String
 
-  lesson Lessons @relation(fields:[lesson_slug], references: [slug], name "LessonComments", onDelete: Cascade)
+  lesson Lessons @relation(fields: [lesson_slug], references: [slug], name: "LessonComments", onDelete: Cascade)
 }
 
 model Users {
-  name String
-  email String
-  admin Bool
+  id String
+  name String 
+  email String @unique
+  admin Boolean
 }
