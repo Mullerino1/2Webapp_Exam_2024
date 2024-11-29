@@ -947,10 +947,10 @@ const isValid = (items) => {
       <main className="h-full">
         <p>Siden er tom</p>
         <SignUp/>
-        <Create/>
+        {/* <Create/>
         <Courses/>
         <Course/>
-        <Lesson/>
+        <Lesson/> */}
       </main>
       <footer className="flex justify-between" data-testid="footer">
         <p>Mikro LMS AS, 2024</p>
