@@ -58,6 +58,7 @@ export default function Course() {
     }, [courseSlug]);
   
     return (
+        <main className="h-full">
       <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
         <aside className="border-r border-slate-200 pr-6">
           <h3 className="mb-4 text-base font-bold">Leksjoner</h3>
@@ -114,5 +115,6 @@ export default function Course() {
           </ul>
         </aside>
       </div>
+      </main>
     );
   }
