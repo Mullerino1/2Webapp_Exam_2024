@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Courses {
+  id String @id
+  title String
+  string slug
+  string description
+  string category
+
+  lessons Lessons[] @relation("CourseLessons")
+}
+
+model Lessons {
+  id String @id
+  course_id String
+  title String
+  slug String
+  description String
+  json text
+
+  course Courses @relation(fields: [course_id], references: [id], name: "CourseLessons", onDelete: Cascade)
+  comments Comments[] @relation("LessonComments")
+}
+
+model Comments {
+  id String @id
+  lesson_slug String
+  created_by String
+  comment String
+
+  lesson Lessons @relation(fields:[lesson_slug], references: [slug], name "LessonComments", onDelete: Cascade)
+}
