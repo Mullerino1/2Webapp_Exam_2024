@@ -1,12 +1,18 @@
 import Link from 'next/link'
 
-const Navigation = () => {
+export const Navigation = () => {
     return (
 
-        <nav className="navigation">
+        <nav className="mt-6 mb-12 flex justify-between">
             <ul>
                 <li>
-                    <Link href=""
+                <h1 className="text-lg font-bold uppercase" data-testid="logo"><Link href="/">Home</Link></h1>
+                </li>
+                <li>
+                <h1 className="text-base font-semibold" data-testid="nav_courses"><Link href="Course">Course</Link></h1>
+                </li>
+                <li>
+                <h1 className="text-base font-semibold" data-testid="nav_new"><Link href="Create">Create</Link></h1>
                 </li>
             </ul>
         </nav>
@@ -25,3 +31,4 @@ const Navigation = () => {
     //   </nav>
     )
 }
+
