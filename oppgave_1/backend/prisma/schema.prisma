@@ -27,7 +27,8 @@ model Lessons {
   slug String
   description String
   json text
-
+  
+  //https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions
   course Courses @relation(fields: [course_id], references: [id], name: "CourseLessons", onDelete: Cascade)
   comments Comments[] @relation("LessonComments")
 }
@@ -39,4 +40,10 @@ model Comments {
   comment String
 
   lesson Lessons @relation(fields:[lesson_slug], references: [slug], name "LessonComments", onDelete: Cascade)
+}
+
+model Users {
+  name String
+  email String
+  admin Bool
 }
