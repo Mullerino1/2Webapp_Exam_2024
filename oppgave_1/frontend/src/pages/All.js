@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import SignUp from "./SignUpPage";
 import Create from "./CreatePage";
-import Courses from "./CoursesPage";
-import Lesson from "./LessonPage";
-import Course from "./CoursePage";
+// import Courses from "./Courses";
+// import Lesson from "./LessonPage";
+import Lesson from "@/components/Lessons";
+// import Course from "./Course";
+import Link from "next/link"
+import Course from "@/components/Course";
+import Courses from "@/components/Courses";
 import {
   categories,
   comments,
@@ -936,7 +940,7 @@ const isValid = (items) => {
             <a href="kurs">Kurs</a>
           </li>
           <li className="text-base font-semibold" data-testid="nav_new">
-            <a href="/ny">Nytt kurs</a>
+            <Link href="/test">Nytt kurs</Link>
           </li>
         </ul>
       </nav>
