@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import Lesson from "./LessonPage";
-import Link from "next/link"
-
+import Link from "next/link";
 import {
-    categories,
-    comments,
-    courseCreateSteps,
     courses,
     users,
-} from "../data/data";
+} from "../../data/data";
 
-import { useParams, useRouter } from "next/navigation";
 
 const getCourse = async (slug) => {
     const data = await courses.filter((course) => course.slug === slug);
     return data?.[0];
   };
   
-  const createCourse = async (data) => {
-    await courses.push(data);
-  };
+//   const createCourse = async (data) => {
+//     await courses.push(data);
+//   };
   
   const getLesson = async (courseSlug, lessonSlug) => {
     const data = await courses
@@ -32,23 +27,23 @@ const getCourse = async (slug) => {
     return data?.[0];
   };
   
-  const getComments = async (lessonSlug) => {
-    const data = await comments.filter(
-      (comment) => comment.lesson.slug === lessonSlug
-    );
-    return data;
-  };
-  
-  const createComment = async (data) => {
-    await comments.push(data);
-  };
+    //   const getComments = async (lessonSlug) => {
+    //     const data = await comments.filter(
+    //       (comment) => comment.lesson.slug === lessonSlug
+    //     );
+    //     return data;
+    //   };
+    
+    //   const createComment = async (data) => {
+    //     await comments.push(data);
+    //   };
 
 
 export default function Course() {
     const [content, setContent] = useState(null);
   
     const courseSlug = "javascript-101";
-    const lessonSlug = "variabler";
+    const lessonSlug = "";
   
     useEffect(() => {
       const getContent = async () => {
