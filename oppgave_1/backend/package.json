@@ -5,8 +5,12 @@
 		"dev": "tsx watch src/index.ts",
 		"db:setup": "tsx src/db/index.ts"
 	},
+	"prisma": {
+		"seed": "node prisma/seed.js"
+	  },
 	"dependencies": {
 		"@hono/node-server": "^1.12.1",
+		"@prisma/client": "^6.0.0",
 		"@t3-oss/env-core": "^0.11.1",
 		"better-sqlite3": "^11.3.0",
 		"dotenv": "^16.4.5",
@@ -19,6 +23,7 @@
 		"@typescript-eslint/eslint-plugin": "^8.2.0",
 		"@typescript-eslint/parser": "^8.2.0",
 		"eslint": "^9.9.0",
+		"prisma": "^6.0.0" ,
 		"tsx": "^4.17.0"
 	}
 }
