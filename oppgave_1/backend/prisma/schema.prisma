@@ -25,7 +25,7 @@ model Lessons {
   title String
   slug String @unique
   description String
-  text String?
+  text String[]
   
   //https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/referential-actions
   course Courses @relation(fields: [course_id], references: [id], name: "CourseLessons", onDelete: Cascade)
