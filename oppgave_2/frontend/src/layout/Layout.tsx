@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react"
 import Navigation from "./Navigation"
+import Footer from "@/components/Footer"
 
 
 export default function Layout(props: PropsWithChildren) {
@@ -7,16 +8,14 @@ export default function Layout(props: PropsWithChildren) {
 
     return(
         <>
-        <header>
+        <header>    
             <Navigation/>
         </header>
         
         <main>
         {children}
         </main>
-        <footer>
-
-        </footer>
+        <Footer/>
         
         </>
     )
