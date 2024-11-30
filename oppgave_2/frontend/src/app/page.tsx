@@ -1,4 +1,17 @@
+import "../styles/css/main.css"
+import FrontPage from "@/Pages/FrontPage";
+import Layout from "@/layout/Layout";
+
 export default function Home() {
-  return <h1>Oppgave 2</h1>;
+
+  return (
+    <>
+    <Layout>
+<h1>Task 2</h1>
+</Layout>
+
+
+</>
+  ) 
 }
 import React from "react";
