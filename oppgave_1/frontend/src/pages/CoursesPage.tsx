@@ -100,7 +100,7 @@ export default function Courses() {
                   className="mb-2 text-base font-bold"
                   data-testid="courses_title"
                 >
-                  <Link href={`/CoursePage/${course.slug}`}>{course.title}</Link>
+                  <Link href={`/courses/${course.slug}`}>{course.title}</Link>
                 </h3>
                 <p
                   className="mb-6 text-base font-light"
@@ -111,7 +111,7 @@ export default function Courses() {
                 <Link
                   className="font-semibold underline"
                   data-testid="courses_url"
-                  href={`/CoursePage/${course.slug}`}
+                  href={`/courses/${course.slug}`}
                 >
                   Til kurs
                 </Link>
