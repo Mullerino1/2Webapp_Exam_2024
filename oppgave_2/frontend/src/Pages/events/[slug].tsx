@@ -57,7 +57,7 @@ export default function EventPage() {
   return (
     
     <Layout>
-        
+
     <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
     <aside className="border-r border-slate-200 pr-6">
     <h3 className="mb-4 text-base font-bold">Events</h3>
@@ -70,10 +70,10 @@ export default function EventPage() {
                 key={arrangement.id}
               >
                 <Link
-                  data-testid="lesson_url"
+                  
                   data-slug={arrangementSlug}
                   className="block h-full w-full"
-                  href={`/events/${event.slug}/${arrangement.slug}`}
+                  href={`/events/${event.slug}/ArrangementPage/${arrangement.slug}`}
                 >
                   {arrangement.title}
                 </Link>
@@ -115,6 +115,7 @@ export default function EventPage() {
           </ul>
         </aside>
     </div>
+    
     </Layout>  
   )
 }

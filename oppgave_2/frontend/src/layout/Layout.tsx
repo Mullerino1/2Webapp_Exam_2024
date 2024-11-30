@@ -9,6 +9,7 @@ export default function Layout(props: PropsWithChildren) {
     return(
         <>
         <header>    
+            <h1>COOL PAGE</h1>
             <Navigation/>
         </header>
         

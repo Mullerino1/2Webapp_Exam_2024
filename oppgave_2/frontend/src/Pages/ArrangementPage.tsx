@@ -108,12 +108,12 @@ export default function Arrangement() {
       <div>
         <div className="flex justify-between">
           <h3 data-testid="course_title" className="mb-6 text-base font-bold">
-            <Link className="underline" href={`/events/${event?.slug}`}>
-              {event?.title}
+            <Link className="underline" href={`/events/${events?.slug}`}>
+              {events?.title}
             </Link>
           </h3>
           <span data-testid="course_category">
-            Kategori: <span className="font-bold">{event?.category}</span>
+            Kategori: <span className="font-bold">{events?.category}</span>
           </span>
         </div>
         <h2 className="text-2xl font-bold" data-testid="lesson_title">

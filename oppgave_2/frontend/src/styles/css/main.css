@@ -26,7 +26,7 @@ a {
 
 
 header nav {
-  position: relative;
+  position: center;
 }
 
 header nav ul {
@@ -36,6 +36,16 @@ header nav ul {
 header nav ul li {
   display: inline;
   margin: 0 15px;
+}
+nav{
+  text-align: center;
+  background-color: #121212;
+  padding: 5px;
+  margin: 3px;
+}
+
+header {
+  text-align: justify;
 }
 
  /* nav:hover ul li {
@@ -49,6 +59,10 @@ header nav ul li {
 main {
   margin-left: 270px;
   padding: 40px;
+}
+
+main article{
+  background-color: #121212;
 }
 
 section {
