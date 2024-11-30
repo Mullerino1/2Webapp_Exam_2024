@@ -13,9 +13,7 @@ export default function Navigation() {
           <li>
             <Link href="/EventsPage">Events</Link>
           </li>
-          <li>
-            <Link href="/AttendPage">Attend</Link>
-          </li>
+        
         </ul>
       </nav>
       </>
