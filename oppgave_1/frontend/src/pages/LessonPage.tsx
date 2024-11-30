@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link"
 import Layout from "@/components/Layout";
+import { ofetch } from "ofetch";
 
 import {
   categories,
@@ -14,34 +15,45 @@ import {
 import { useRouter } from "next/router";
 
 const getCourse = async (slug) => {
-  const data = await courses.filter((course) => course.slug === slug);
-  return data?.[0];
+  const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+  const courses = await data.filter((course) => course.slug === slug);
+  return courses?.[0];
 };
 
 // const createCourse = async (data) => {
 //   await courses.push(data);
 // };
 
-const getLesson = async (courseSlug, lessonSlug) => {
-  const data = await courses
-    .flatMap(
-      (course) =>
-        course.slug === courseSlug &&
-        course.lessons.filter((lesson) => lesson.slug === lessonSlug)
-    )
-    .filter(Boolean);
-  return data?.[0];
+const getLesson = async (courseSlug, lesson_slug) => {
+  try {
+    const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+    
+    // Flatten the lessons from all courses and filter for the desired one
+    const lessons = data
+      .flatMap((course) => 
+        course.slug === courseSlug ? course.lessons : [] // Only take lessons for the matched course
+      )
+      .filter((lesson) => lesson.slug === lesson_slug); // Filter for the desired lesson
+    
+    return lessons?.[0] || null; // Return the first matching lesson or null
+  } catch (error) {
+    console.error("Error fetching lesson:", error);
+    return null; // Handle errors gracefully
+  }
 };
 
-const getComments = async (lessonSlug) => {
-  const data = await comments.filter(
-    (comment) => comment.lesson.slug === lessonSlug
+const getComments = async (lesson_slug) => {
+  const data = await ofetch(baseUrl + endpoints.comments, {query: lesson_slug})
+  const comments = data.filter(
+    (comment) => comment.lesson_slug === lesson_slug
   );
   return data;
 };
 
 const createComment = async (data) => {
-  await comments.push(data);
+  await ofetch(baseUrl + endpoints.comments, {
+    method: "POST",
+    body: data})
 };
 
 
@@ -54,7 +66,7 @@ export default function Lesson() {
     const [lesson, setLesson] = useState(null);
     const [course, setCourse] = useState(null);
     const courseSlug = "javascript-101";
-    const lessonSlug = "variabler";
+    const lesson_slug = "variabler";
 
     const router = useRouter()
     const { slug } = router.query
@@ -83,9 +95,9 @@ export default function Lesson() {
             name,
           },
           comment,
-          lesson: { slug: lessonSlug },
+          lesson_slug: lesson_slug ,
         });
-        const commentsData = await getComments(lessonSlug);
+        const commentsData = await getComments(lesson_slug);
         setComments(commentsData);
         setSuccess(true);
       }
@@ -93,15 +105,15 @@ export default function Lesson() {
   
     useEffect(() => {
       const getContent = async () => {
-        const lessonDate = await getLesson(courseSlug, lessonSlug);
-        const courseData = await getCourse(courseSlug, lessonSlug);
-        const commentsData = await getComments(lessonSlug);
+        const lessonDate = await getLesson(courseSlug, lesson_slug);
+        const courseData = await getCourse(courseSlug);
+        const commentsData = await getComments(lesson_slug);
         setLesson(lessonDate);
         setCourse(courseData);
         setComments(commentsData);
       };
       getContent();
-    }, [courseSlug, lessonSlug]);
+    }, [courseSlug, lesson_slug]);
   
     return (
       <Layout>

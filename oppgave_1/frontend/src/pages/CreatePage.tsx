@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Layout from "@/components/Layout";
+import { ofetch } from 'ofetch';
+
+
 import {
     categories,
     comments,
@@ -10,7 +13,9 @@ import {
   } from "../data/data";
 
   const createCourse = async (data) => {
-    await courses.push(data);
+    await ofetch(baseUrl + endpoints.comments, {
+      method: "POST",
+      body: data})
   };
   
 

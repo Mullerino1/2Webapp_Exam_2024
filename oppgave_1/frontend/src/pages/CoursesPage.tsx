@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Link from "next/link"
+import { ofetch } from "ofetch";
 
 import {
   categories,
@@ -11,9 +12,21 @@ import {
 import { useParams, useRouter } from "next/navigation";
 
 const getCourse = async (slug) => {
-    const data = await courses.filter((course) => course.slug === slug);
-    return data?.[0];
+  
+    const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+    const courses = await data.filter((course) => course.slug === slug);
+    return courses?.[0];
   };
+
+const getCourses = async () => {
+  try {
+    //https://www.npmjs.com/package/ofetch/v/1.2.1
+  const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+  if (data.success) return data['data'];
+} catch (error) {
+  console.error("Unable to fetch data:", error);
+}
+};
   
 
 
@@ -21,10 +34,12 @@ export default function Courses() {
     const [value, setValue] = useState("");
     const [data, setData] = useState(courses);
   
-    const handleFilter = (event) => {
+    const handleFilter = async (event) => {
       const category = event.target.value;
       setValue(category);
+      try {
       if (category && category.length > 0) {
+        const courses = await getCourses()
         const content = courses.filter((course) =>
           course.category.toLocaleLowerCase().includes(category.toLowerCase())
         );
@@ -32,6 +47,9 @@ export default function Courses() {
       } else {
         setData(courses);
       }
+    } catch (error) {
+      console.error("Error filtering courses:", error);
+    }
     };
   
     return (
