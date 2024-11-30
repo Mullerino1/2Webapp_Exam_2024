@@ -77,6 +77,7 @@ async function main() {
           ]
         })
         const lessons = await prisma.lessons.createMany({
+          
           data: [
             {
               id: '1',
