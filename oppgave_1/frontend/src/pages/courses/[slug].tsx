@@ -30,13 +30,10 @@ const getCourse = async (slug) => {
 
 export default function CoursePage() {
   const router = useRouter()
-  const { slug } = router.query
+  const { slug, lessonSlug } = router.query
   const [content, setContent] = useState(null);
   
   
-
-  
- 
   const course = courses.find(c => c.slug === slug)
 
   
@@ -44,7 +41,7 @@ export default function CoursePage() {
     return <div>Course not found</div>
   }
 //   const courseSlug = "javascript-101";
-  const lessonSlug = "";
+  // const lessonSlug = "";
   
 
 //   useEffect(() => {
@@ -74,7 +71,7 @@ export default function CoursePage() {
                   data-testid="lesson_url"
                   data-slug={lessonSlug}
                   className="block h-full w-full"
-                  href={`/courses/${course.slug}/LessonPage/${lesson.slug}`}
+                  href={`/courses/${course.slug}/${lesson.slug}`}
                 >
                   {lesson.title}
                 </Link>
