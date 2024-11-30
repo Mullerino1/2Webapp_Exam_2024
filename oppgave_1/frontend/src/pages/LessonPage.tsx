@@ -8,7 +8,7 @@ import {
   courseCreateSteps,
   courses,
   users,
-} from "../../data/data";
+} from "../data/data";
 
 import { useParams, useRouter } from "next/navigation";
 

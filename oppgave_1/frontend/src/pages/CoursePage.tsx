@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
     courses,
     users,
-} from "../../data/data";
+} from "../data/data";
 
 
 const getCourse = async (slug) => {
