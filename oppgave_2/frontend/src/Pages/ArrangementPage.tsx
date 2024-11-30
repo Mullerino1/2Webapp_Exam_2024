@@ -53,8 +53,8 @@ export default function Arrangement() {
     const [name, setName] = useState("");
     const [lesson, setLesson] = useState(null);
     const [course, setCourse] = useState(null);
-    const eventSlug = "Rammstein";
-    const arrangementSlug = "variabler";
+    const eventSlug = "";
+    const arrangementSlug = "";
 
     const router = useRouter()
     const { slug } = router.query
@@ -112,21 +112,21 @@ export default function Arrangement() {
               {events?.title}
             </Link>
           </h3>
-          <span data-testid="course_category">
+          <span>
             Kategori: <span className="font-bold">{events?.category}</span>
           </span>
         </div>
-        <h2 className="text-2xl font-bold" data-testid="lesson_title">
-          {arrangement?.title}
+        <h2 >
+          {events?.title}
         </h2>
         <p
           data-testid="lesson_preAmble"
           className="mt-4 font-semibold leading-relaxed"
         >
-          {arrangement?.preAmble}
+          {events?.preAmble}
         </p>
-        {arrangement?.text?.length > 0 &&
-          arrangement.text.map((text) => (
+        {events?.text?.length > 0 &&
+          events.text.map((text) => (
             <p
               data-testid="lesson_text"
               className="mt-4 font-normal"

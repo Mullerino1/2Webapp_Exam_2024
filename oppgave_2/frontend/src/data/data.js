@@ -48,7 +48,7 @@ export const events = [
       slug: 'christmas',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'FoodMarket',
     },
     {
@@ -57,7 +57,7 @@ export const events = [
       slug: 'oslo',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'Marathon',
     },
     {
@@ -66,7 +66,7 @@ export const events = [
       slug: 'nature',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'Hike',
     },
     {
@@ -75,7 +75,7 @@ export const events = [
       slug: 'katyperry',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'Concert',
     },
     {
@@ -84,7 +84,7 @@ export const events = [
       slug: 'handballhalden',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'Handball',
     },
     {
@@ -93,7 +93,7 @@ export const events = [
       slug: 'ffdp',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-      lessons: [],
+        arrangements: [],
       category: 'Concert',
     },
   ]
