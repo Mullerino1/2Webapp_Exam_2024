@@ -86,7 +86,7 @@ async function main() {
               slug: 'variabler',
               description:
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-              text: [
+              text: JSON.stringify([
                 {
                   id: '1',
                   text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ',
@@ -95,7 +95,7 @@ async function main() {
                   id: '2',
                   text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
                 },
-              ],
+              ]),
             },
             {
               id: '2',
@@ -104,7 +104,7 @@ async function main() {
               slug: 'lokker',
               description:
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-              text: [],
+              text: JSON.stringify([]),
             },
             {
               id: '3',
@@ -113,10 +113,26 @@ async function main() {
               slug: 'deconstruction',
               description:
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-              text: [],
+              text: JSON.stringify([]),
             }
           ]
     })
+    const comments = await prisma.comments.createMany({
+      data: [{
+        id: '1',
+        created_by: JSON.stringify({ id: '2', name: 'Sara Olsen' }),
+        comment:
+          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+        lesson_slug: 'variabler',
+      },
+      {
+        id: '2',
+        created_by: JSON.stringify({ id: '3', name: 'Finn Finnsen' }),
+        comment:
+          'Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+        lesson_slug: 'variabler',
+      }],
+})
   }
 main()
   .then(async () => {

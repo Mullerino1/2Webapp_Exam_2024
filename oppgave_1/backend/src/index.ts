@@ -216,7 +216,7 @@ app.post(lessonslink, async (c) => {
         slug: lessonData.slug,
         title: lessonData.title,
         description: lessonData.description,
-        text: lessonData.text
+        text: JSON.stringify(lessonData.text)
       }
     })
 
