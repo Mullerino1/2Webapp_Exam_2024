@@ -9,7 +9,7 @@ export const Navigation = () => {
         </h1>
         <ul className="flex gap-8" data-testid="nav">
           <li className="text-base font-semibold" data-testid="nav_courses">
-            <Link href="CoursesPage">Kurs</Link>
+            <Link href="/CoursesPage">Kurs</Link>
           </li>
           <li className="text-base font-semibold" data-testid="nav_new">
             <Link href="/CreatePage">Nytt kurs</Link>

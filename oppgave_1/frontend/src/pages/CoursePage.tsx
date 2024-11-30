@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Lesson from "./LessonPage";
 import Link from "next/link";
+import Layout from "@/components/Layout";
+
 import {
     courses,
     users,
@@ -54,7 +56,8 @@ export default function Course() {
     }, [courseSlug]);
   
     return (
-        
+      
+       
       <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
         <aside className="border-r border-slate-200 pr-6">
           <h3 className="mb-4 text-base font-bold">Leksjoner</h3>
@@ -111,6 +114,8 @@ export default function Course() {
           </ul>
         </aside>
       </div>
+      
+      
      
     );
   }

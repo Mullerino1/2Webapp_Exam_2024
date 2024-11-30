@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import SignUp from "./SignUpPage";
 import { Navigation } from "@/components/Navigation";
 import Layout from "@/components/Layout";
+import "../styles/tailwind/main.css";
+
 
 import {
   categories,

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import { courses } from '@/data/data';
+import Layout from '@/components/Layout';
 
 export default function CoursePage() {
   const router = useRouter()
@@ -15,6 +16,7 @@ export default function CoursePage() {
   }
 
   return (
+    
     <div>
       <h1>{course.title}</h1>
       <p>{course.description}</p>
@@ -31,5 +33,6 @@ export default function CoursePage() {
         ))}
       </ul>
     </div>
+   
   )
 }

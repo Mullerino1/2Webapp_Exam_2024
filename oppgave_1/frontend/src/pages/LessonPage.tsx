@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link"
+import Layout from "@/components/Layout";
 
 import {
   categories,
@@ -98,6 +99,7 @@ export default function Lesson() {
     }, [courseSlug, lessonSlug]);
   
     return (
+      <Layout>
       <div>
         <div className="flex justify-between">
           <h3 data-testid="course_title" className="mb-6 text-base font-bold">
@@ -198,6 +200,7 @@ export default function Lesson() {
           </ul>
         </section>
       </div>
+      </Layout>
     );
   }
   
