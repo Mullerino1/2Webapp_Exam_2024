@@ -11,16 +11,16 @@ import {
   users,
 } from "../data/data";
 
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const getCourse = async (slug) => {
   const data = await courses.filter((course) => course.slug === slug);
   return data?.[0];
 };
 
-const createCourse = async (data) => {
-  await courses.push(data);
-};
+// const createCourse = async (data) => {
+//   await courses.push(data);
+// };
 
 const getLesson = async (courseSlug, lessonSlug) => {
   const data = await courses
@@ -55,6 +55,11 @@ export default function Lesson() {
     const [course, setCourse] = useState(null);
     const courseSlug = "javascript-101";
     const lessonSlug = "variabler";
+
+    const router = useRouter()
+    const { slug } = router.query
+    
+    
   
     const handleComment = (event) => {
       setComment(event.target.value);
@@ -103,9 +108,9 @@ export default function Lesson() {
       <div>
         <div className="flex justify-between">
           <h3 data-testid="course_title" className="mb-6 text-base font-bold">
-            <a className="underline" href={`/CoursePage/${course?.slug}`}>
+            <Link className="underline" href={`/courses/${course?.slug}`}>
               {course?.title}
-            </a>
+            </Link>
           </h3>
           <span data-testid="course_category">
             Kategori: <span className="font-bold">{course?.category}</span>
