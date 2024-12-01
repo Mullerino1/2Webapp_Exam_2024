@@ -32,7 +32,7 @@ const getEvents = async (slug) => {
 export default function EventPage() {
   const router = useRouter()
   const { slug } = router.query
-  const [content, setContent] = useState(null);
+  // const [content, setContent] = useState(null);
   
   
  

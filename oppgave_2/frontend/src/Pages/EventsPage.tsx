@@ -84,7 +84,7 @@ export default function Events() {
                 </p>
                 <Link
                  
-                  href={`/courses/${event.slug}`}
+                  href={`/events/${event.slug}`}
                 >
                   To Event
                 </Link>

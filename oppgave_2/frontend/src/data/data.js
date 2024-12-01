@@ -8,8 +8,8 @@ export const events = [
       arrangements: [
         {
           id: '1',
-          title: 'Variabler',
-          slug: 'variabler',
+          title: 'Rammstein Concert',
+          slug: 'Rammstein',
           preAmble:
             'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
           text: [
@@ -23,22 +23,7 @@ export const events = [
             },
           ],
         },
-        {
-          id: '2',
-          title: 'Løkker',
-          slug: 'lokker',
-          preAmble:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-          text: [],
-        },
-        {
-          id: '3',
-          title: 'Deconstruction',
-          slug: 'deconstruction',
-          preAmble:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-          text: [],
-        },
+      
       ],
       category: 'Concert',
     },
@@ -48,7 +33,25 @@ export const events = [
       slug: 'christmas',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-        arrangements: [],
+        arrangements: [
+          {
+            id: '4',
+            title: 'Christmas Halden',
+            slug: 'christmas',
+            preAmble:
+              'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            text: [
+              {
+                id: '5',
+                text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ',
+              },
+              {
+                id: '6',
+                text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+              },
+            ],
+          },
+        ],
       category: 'FoodMarket',
     },
     {
