@@ -4,12 +4,10 @@
 import React from "react";
 import Layout from "@/layout/Layout";
 import Project from "@/components/Projects";
-
-import useProjects from "../hooks/useProjects"; // Import the custom hook
-import { useEffect, useState } from "react";
-// import type { Project as ProjectType } from "../Components/Types";
+import useProjects from "../hooks/useProjects"; 
+// import { useEffect, useState } from "react";
 import type { HandleProject, Project as ProjectType } from "@/components/Types";
-import useProjectForm from "../hooks/useProjectForm";
+// import useProjectForm from "../hooks/useProjectForm";
 
 export default function FrontPage() {
   const { add, remove, update, status, get, data, error } = useProjects();
@@ -47,26 +45,17 @@ export default function FrontPage() {
     }
   };
 
-  // const addProject = async (id: string) => {
-  //   const updatedStreak = await addProjectServer(id);
-
-  //   if (!updatedStreak) return;
-
-  //   await get();
-  // };
-
-  
-
-  // if (status.loading) return <p>Laster ...</p>;
-  // if (status.error) return <p className="error">{error}</p>;
+ 
 
   return (
     <>
+    <Layout>
        <Project
         projects={projects}
         handleProjectMutation={handleProjectMutation}
       >
       </Project>
+      </Layout>
     </>
   )
 }

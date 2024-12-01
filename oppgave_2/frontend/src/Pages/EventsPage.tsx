@@ -1,3 +1,6 @@
+"use client"
+
+
 
 import { useState, useEffect } from "react";
 import Layout from "@/layout/Layout";
