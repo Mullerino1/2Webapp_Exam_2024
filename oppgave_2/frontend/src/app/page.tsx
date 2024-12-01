@@ -1,5 +1,5 @@
 import "../styles/css/main.css"
-import FrontPage from "@/Pages/FrontPage";
+import FrontPage from "@/pages/FrontPage";
 
 export default function Home() {
 

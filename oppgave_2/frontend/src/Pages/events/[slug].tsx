@@ -61,7 +61,7 @@ export default function EventPage() {
     <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
     <aside className="border-r border-slate-200 pr-6">
     <h3 className="mb-4 text-base font-bold">Events</h3>
-          <ul data-testid="lessons">
+          {/* <ul data-testid="lessons">
             {event?.arrangements?.map((arrangement) => (
               <li
                 className={`text-sm" mb-4 w-full max-w-[95%] rounded-lg border border-slate-300 px-4 py-2 ${
@@ -79,7 +79,7 @@ export default function EventPage() {
                 </Link>
               </li>
             ))}
-          </ul> 
+          </ul>  */}
          
         </aside>
         {arrangementSlug ? (
@@ -101,7 +101,7 @@ export default function EventPage() {
             </>
           </section>
         )}
-        <aside
+        {/* <aside
           data-testid="enrollments"
           className="border-l border-slate-200 pl-6"
         >
@@ -113,7 +113,7 @@ export default function EventPage() {
               </li>
             ))}
           </ul>
-        </aside>
+        </aside> */}
     </div>
     
     </Layout>  
