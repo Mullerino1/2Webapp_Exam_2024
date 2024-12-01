@@ -1,3 +1,5 @@
+"use client"
+
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import { courses, users } from '@/data/data';
@@ -5,39 +7,60 @@ import Layout from '@/components/Layout';
 import Lesson from '../LessonPage';
 import { useState, useEffect } from 'react';
 import "../../styles/tailwind/main.css";
+import { ofetch } from 'ofetch';
+import { baseUrl, endpoints } from '@/lib/config/urls';
 
-
+let initialized = false;
 
 const getCourse = async (slug) => {
-    const data = await courses.filter((course) => course.slug === slug);
-    return data?.[0];
-  };
+  const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+  const courses = await data['data'].filter((course) => course.slug === slug);
+  console.log(data['data'][0].slug)
+  console.log(slug)
+  console.log(courses)
+  return courses?.[0];
+};
   
 //   const createCourse = async (data) => {
 //     await courses.push(data);
 //   };
   
-  const getLesson = async (courseSlug, lessonSlug) => {
-    const data = await courses
-      .flatMap(
-        (course) =>
-          course.slug === courseSlug &&
-          course.lessons.filter((lesson) => lesson.slug === lessonSlug)
+const getLesson = async (courseSlug, lesson_slug) => {
+  try {
+    const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+    
+    // Flatten the lessons from all courses and filter for the desired one
+    const lessons = data
+      .flatMap((course) => 
+        course.slug === courseSlug ? course.lessons : [] // Only take lessons for the matched course
       )
-      .filter(Boolean);
-    return data?.[0];
-  };
+      .filter((lesson) => lesson.slug === lesson_slug); // Filter for the desired lesson
+    
+    return lessons?.[0] || null; // Return the first matching lesson or null
+  } catch (error) {
+    console.error("Error fetching lesson:", error);
+    return null; // Handle errors gracefully
+  }
+};
 
 export default function CoursePage() {
   const router = useRouter()
-  const { slug } = router.query
   const [content, setContent] = useState(null);
+  const [course, setCourse] = useState()
   
-  
-
-  
- 
-  const course = courses.find(c => c.slug === slug)
+  useEffect(() => {
+    if (!initialized) {
+      initialized = true;
+      const fetchData = async () => {
+        const { slug } = router.query
+        console.log("Slug is: " + slug)
+        const data = await getCourse(slug)
+        console.log(data)
+        setCourse(data);
+      };
+      fetchData();
+    }
+  }, []);
 
   
   if (!course) {

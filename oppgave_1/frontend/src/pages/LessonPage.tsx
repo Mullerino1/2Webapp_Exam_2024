@@ -13,6 +13,7 @@ import {
 } from "../data/data";
 
 import { useRouter } from "next/router";
+import { baseUrl,endpoints } from "@/lib/config/urls";
 
 const getCourse = async (slug) => {
   const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });

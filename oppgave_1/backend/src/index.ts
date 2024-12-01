@@ -38,10 +38,10 @@ const postUserSchema = z.object({
   admin: z.boolean()
 })
 
-const commentslink = "http://localhost:3999/comments"
-const courseslink = "http://localhost:3999/courses"
-const lessonslink = "http://localhost:3999/lessons"
-const userslink = "http://localhost:3999/users"
+const commentslink = "/comments"
+const courseslink = "/courses"
+const lessonslink = "/lessons"
+const userslink = "/users"
 
 console.log(`Server is running on port ${port}`);
 
@@ -59,48 +59,63 @@ app.get(courseslink, async (c) => {
     const courses = await prisma.courses.findMany({
       include: {
         lessons: true,
-        },
+      },
     });
+
     const data = courses.map(course => ({
-      ...courses,
-      lessons: course.lessons.map(lesson => lesson.lesson),  // Convert tags to an array of strings
+      ...course, // Spread the individual `course` object
+      lessons: course.lessons.map(lesson => lesson.lesson),  // Convert lessons to an array of strings
     }));
-    console.log(data);
-    if (data.size() > 0) {return c.json({success: true, data: data}, 200);}
-    else {{return c.json({success: true, data: data}, 204);}}
+
+    if (data.length > 0) {
+      return c.json({ success: true, data: data }, 200);
+    } else {
+      return c.json({ success: true, data: [] }, 204); // Return empty array if no courses
+    }
   } catch (err) {
     console.error(`Error writing to database`, err);
-    return c.json({success: true, error: `Error writing to database: ` + err}, 500);
+    return c.json({ success: false, error: `Error writing to database: ` + err }, 500);
   }
 });
 
 app.post(courseslink, async (c) => {
-  let newLesson;
-  const body = await c.req.formData();
-  const entries = body.entries();
-  let course;
-  
-  for (let entry of entries) {
-    course = JSON.parse(entry[1])
-  }
+  const course = await c.req.json();  
   const courseData = {
   title: course['title'],
   slug: course['slug'],
   description: course['description'],
   category:course['category']
   }
+  
+  const lessonData = course['lessons']
+  console.log(lessonData[0])
 
   try {
     postCourseSchema.parse(courseData)
-    newLesson = await prisma.courses.create({
+    const newCourse = await prisma.courses.create({
       data: {
-        id: Date.now(),
+        id: `${Date.now()}`,
         title: courseData.title,
         slug: courseData.slug,
         description: courseData.description,
         category: courseData.category
       }
     })
+
+    for (let i = 0; i < lessonData.length; i++) {
+      console.log(lessonData[i])
+      const newLesson = await prisma.lessons.create({
+        data: {
+          id: `${Date.now()}`,
+          course_id: `${newCourse.id}`,
+          title: lessonData[i]['title'],
+          slug: lessonData[i]['slug'],
+          description: lessonData[i]['description'],
+          text: JSON.stringify(lessonData[i]['text']),
+        }
+      })
+    }
+  
 
     console.log('Insert Successful');
   } catch (err) {

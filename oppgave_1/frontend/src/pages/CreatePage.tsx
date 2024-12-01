@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Layout from "@/components/Layout";
 import { ofetch } from 'ofetch';
+import { baseUrl, endpoints } from "@/lib/config/urls";
 
 
 import {
@@ -13,7 +14,7 @@ import {
   } from "../data/data";
 
   const createCourse = async (data) => {
-    await ofetch(baseUrl + endpoints.comments, {
+    await ofetch(baseUrl + endpoints.courses, {
       method: "POST",
       body: data})
   };
@@ -47,7 +48,7 @@ export default function Create() {
         setCurrent(2);
         await createCourse({ ...courseFields, lessons });
         setTimeout(() => {
-          router.push("/kurs");
+          router.push("/CoursesPage");
         }, 500);
       } else {
         setFormError(true);
@@ -142,7 +143,7 @@ export default function Create() {
           id: `${Math.floor(Math.random() * 1000 + 1)}`,
           title: "",
           slug: "",
-          preAmble: "",
+          description: "",
           text: [],
           order: `${lessons.length}`,
         },
@@ -349,15 +350,15 @@ export default function Create() {
                       onChange={handleLessonFieldChange}
                     />
                   </label>
-                  <label className="mb-4 flex flex-col" htmlFor="preAmble">
+                  <label className="mb-4 flex flex-col" htmlFor="description">
                     <span className="mb-1 font-semibold">Ingress*</span>
                     <input
                       className="rounded"
-                      data-testid="form_lesson_preAmble"
+                      data-testid="form_lesson_description"
                       type="text"
-                      name="preAmble"
-                      id="preAmble"
-                      value={lessons[currentLesson]?.preAmble}
+                      name="description"
+                      id="description"
+                      value={lessons[currentLesson]?.description}
                       onChange={handleLessonFieldChange}
                     />
                   </label>
@@ -458,8 +459,8 @@ export default function Create() {
                         Tittel: {lesson?.title}
                       </p>
                       <p data-testid="review_lesson_slug">Slug: {lesson?.slug}</p>
-                      <p data-testid="review_lesson_preamble">
-                        Ingress: {lesson?.preAmble}
+                      <p data-testid="review_lesson_description">
+                        Ingress: {lesson?.description}
                       </p>
                       <p>Tekster: </p>
                       <ul

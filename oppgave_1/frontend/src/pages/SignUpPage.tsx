@@ -20,7 +20,7 @@ export default function SignUp() {
       if (formIsValid.length === 0) {
         setSuccess(true);
         setTimeout(() => {
-          router.push("/kurs");
+          router.push("/CoursesPage");
         }, 500);
       } else {
         setFormError(true);
