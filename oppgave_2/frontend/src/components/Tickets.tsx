@@ -17,19 +17,19 @@ export default function Tickets(
   const { tickets = [], handleProjectMutation, children } = props
   const [editing, setEditing] = useState<Ticket | undefined>(undefined)
 
-  const editProject = (ticket: Ticket) => {
-    if (editing?.id === ticket.id) return setEditing(undefined)
-    setEditing(ticket)
-  }
+  // const editProject = (ticket: Ticket) => {
+  //   if (editing?.id === ticket.id) return setEditing(undefined)
+  //   setEditing(ticket)
+  // }
 
   const onSubmit = (id: string | undefined, data: Partial<Ticket>) => {
-    if (id) return handleProjectMutation({ action: "update", id, ticket: data })
+    if (id) return handleProjectMutation({ id, ticket: data })
     return handleProjectMutation({ action: "add", ticket: data })
   }
 
-  const removeProject = (id: string) => {
-    handleProjectMutation({ action: "remove", id })
-  }
+  // const removeProject = (id: string) => {
+  //   handleProjectMutation({ action: "remove", id })
+  // }
 
   return (
     <>

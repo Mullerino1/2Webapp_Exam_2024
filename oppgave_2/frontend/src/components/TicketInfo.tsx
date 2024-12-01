@@ -16,21 +16,21 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
     initialFields: { 
       title: ticket?.title ?? "",
       description: ticket?.description ?? "",
-      date: ticket?.createdAt ?? "" 
+  
     },
     onSubmit: (data) => onSubmit(ticket?.title, data),
     validate: {
       title: (_, value) => value.length > 2,
       description: (_, value) => value.length > 5, 
-      date: (_, value) => !!Date.parse(value) 
+     
     },
   })
 
   const labels = {
-    edit: {
-      title: "Edit Project Title",
-      submit: "Update Project",
-    },
+    // edit: {
+    //   title: "Edit Project Title",
+    //   submit: "Update Project",
+    // },
     add: {
       title: "Add a New Project",
       submit: "Add Project",
@@ -39,7 +39,7 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
 
   return (
     <section className="YourTicket" data-testid="ticket-idea">
-      <h3>{isEditing ? labels.edit.title : labels.add.title}</h3>
+      <h3>{ labels.add.title}</h3>
       
       <form onSubmit={handleSubmit}>
         <div className="title field">
@@ -84,7 +84,7 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
 
         <div>
           <button type="submit" id="submit" className="success">
-            {isEditing ? labels.edit.submit : labels.add.submit}
+            { labels.add.submit}
           </button>
         </div>
       </form>

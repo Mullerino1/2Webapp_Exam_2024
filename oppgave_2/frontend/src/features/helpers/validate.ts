@@ -9,8 +9,7 @@ const projectSchema = z.object({
     public: z.boolean(),
     deleted: z.boolean(),
     tags: z.array(z.string()),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string(),
+    date: z.string().datetime(),
     slug: z.string(),
   
     

@@ -4,13 +4,13 @@
 import React from "react";
 import Layout from "@/layout/Layout";
 import Project from "@/components/Tickets";
-import useProjects from "../hooks/useTickets"; 
+import useTicket from "../hooks/useTickets"; 
 // import { useEffect, useState } from "react";
 import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
 // import useProjectForm from "../hooks/useProjectForm";
 
 export default function FrontPage() {
-  const { add, remove, update, status, get, data, error } = useProjects();
+  const { add, status, get, data, error } = useTicket();
   const tickets = data;
 
   const handleProjectMutation: HandleProject = (props) => {
@@ -20,18 +20,18 @@ export default function FrontPage() {
       case "add":
         add(props.ticket);
         break;
-      case "remove":
-        remove(props.id);
-        break;
-      case "update":
-        update(props.id, props.ticket);
-        break;
-      default:
-        break;
+    //   case "remove":
+    //     remove(props.id);
+    //     break;
+    //   case "update":
+    //     update(props.id, props.ticket);
+    //     break;
+    //   default:
+    //     break;
     }
   };
 
-  const addProjectServer = async (id: string) => {
+  const addTicketServer = async (id: string) => {
     try {
       return fetch("http://localhost:3000", {
         method: "POST",
