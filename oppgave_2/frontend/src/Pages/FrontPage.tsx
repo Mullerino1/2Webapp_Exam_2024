@@ -3,28 +3,28 @@
 
 import React from "react";
 import Layout from "@/layout/Layout";
-import Project from "@/components/Projects";
-import useProjects from "../hooks/useProjects"; 
+import Project from "@/components/Tickets";
+import useProjects from "../hooks/useTickets"; 
 // import { useEffect, useState } from "react";
-import type { HandleProject, Project as ProjectType } from "@/components/Types";
+import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
 // import useProjectForm from "../hooks/useProjectForm";
 
 export default function FrontPage() {
   const { add, remove, update, status, get, data, error } = useProjects();
-  const projects = data;
+  const tickets = data;
 
   const handleProjectMutation: HandleProject = (props) => {
     const { action } = props;
 
     switch (action) {
       case "add":
-        add(props.project);
+        add(props.ticket);
         break;
       case "remove":
         remove(props.id);
         break;
       case "update":
-        update(props.id, props.project);
+        update(props.id, props.ticket);
         break;
       default:
         break;
@@ -51,7 +51,7 @@ export default function FrontPage() {
     <>
     <Layout>
        <Project
-        projects={projects}
+        tickets={tickets}
         handleProjectMutation={handleProjectMutation}
       >
       </Project>

@@ -1,3 +1,5 @@
+"use client"
+
 
 import type { z } from "zod"
 import type {projectSchema} from "@/features/helpers/validate";
@@ -19,11 +21,11 @@ export type HandleProjectProps =
   | {
       action: typeof actions.update
       id: string
-      project: Partial<Project>
+      ticket: Partial<Ticket>
     }
   | {
       action: typeof actions.add
-      project: Partial<Project>
+      ticket: Partial<Ticket>
     
     }
 
@@ -31,6 +33,6 @@ export type HandleProject = (props: HandleProjectProps) => void
 
 export type Action = typeof actions
 
-export type Project = z.infer<typeof projectSchema>
+export type Ticket = z.infer<typeof projectSchema>
 
 

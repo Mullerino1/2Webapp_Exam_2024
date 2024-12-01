@@ -11,6 +11,7 @@ const projectSchema = z.object({
     tags: z.array(z.string()),
     createdAt: z.string().datetime(),
     updatedAt: z.string(),
+    slug: z.string(),
   
     
 })

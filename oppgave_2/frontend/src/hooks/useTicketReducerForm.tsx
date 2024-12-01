@@ -1,4 +1,6 @@
 //Just about this entire code is from the courses and Marius Wallin
+"use client"
+
 
 import { useEffect, useReducer, type FormEvent } from "react";
 
@@ -82,7 +84,7 @@ function formReducer<T extends Record<string, string>>(
   }
 }
 
-export function useProjectReducerForm<T extends Record<string, string>>({
+export function useTicketReducerForm<T extends Record<string, string>>({
 initialFields,
 onSubmit,
 validate,
@@ -145,4 +147,4 @@ const getFieldProps = (field: keyof T) => ({
   };
 }
 
-export default useProjectReducerForm;
+export default useTicketReducerForm;

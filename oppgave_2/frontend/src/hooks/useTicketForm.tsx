@@ -1,7 +1,8 @@
+"use client"
 
 
 import { useState, type FormEvent } from "react";
-import type { Project } from "@/components/Types";
+import type { Ticket } from "@/components/Types";
 
 // Define types for FieldState and the form's props
 type FieldState = {
@@ -20,7 +21,7 @@ type UseFormProps<T> = {
 }
 
 // A generalized useForm hook that we can use for Project or any other form
-export function useProjectForm<T extends Record<string, string>>({
+export function useTicketForm<T extends Record<string, string>>({
   initialFields,
   onSubmit,
   validate,
@@ -108,5 +109,5 @@ export function useProjectForm<T extends Record<string, string>>({
   }
 }
 
-export default useProjectForm
+export default useTicketForm
 

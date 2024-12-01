@@ -1,14 +1,17 @@
+"use client"
+
+
 import { useCallback, useEffect, useState } from "react";
-import type { Project as ProjectType } from "@/components/Types";
+import type { Ticket as TicketType } from "@/components/Types";
 import projectApi from "@/lib/services/api"
 
 
 
 type Status = "idle" | "loading" | "error" | "success" | "fetching"
 
-export function useProjects(){
+export function useTickets(){
   const [status, setStatus] = useState<Status>("idle")
-  const [data, setData] = useState<ProjectType[]>([])
+  const [data, setData] = useState<TicketType[]>([])
   
   const [error, setError] = useState<string | null>(null)
 
@@ -64,13 +67,13 @@ export function useProjects(){
 
 
 
-  const add = async (data: Partial<ProjectType>) => {
+  const add = async (data: Partial<TicketType>) => {
     console.log(data + '2')
-    const { title = "", description = "", id= "", createdAt="", updatedAt = "" }  = data
+    const { title = "", description = "", createdAt="", updatedAt = "" }  = data
 
     try {
       setStatus("loading")
-      await projectApi.create({ title, description, id, createdAt, updatedAt})
+      await projectApi.create({ title, description, createdAt, updatedAt})
       await fetchData()
       setStatus("success")
     } catch (error) {
@@ -95,7 +98,7 @@ export function useProjects(){
     }
   }
 
-  const update = async (id: string, data: Partial<ProjectType>) => {
+  const update = async (id: string, data: Partial<TicketType>) => {
     try {
       setStatus("loading")
       await projectApi.update(id, data)
@@ -126,6 +129,6 @@ export function useProjects(){
     }
   }
 
-  export default useProjects
+  export default useTickets
  
 

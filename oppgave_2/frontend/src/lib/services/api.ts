@@ -1,6 +1,8 @@
+"use client"
+
 
 import { endpoints } from "@/config/urls";
-import type { Project } from "@/components/Types";
+import type { Ticket } from "@/components/Types";
 import { validateProject } from "@/features/helpers/validate";
 
 const url = endpoints
@@ -20,9 +22,9 @@ const remove = async (id: string) => {
   }
 }
 
-const create = async (data: Partial<Project>) => {
+const create = async (data: Partial<Ticket>) => {
   try {
-    const createdProject = await fetch(url, {
+    const createdTicket = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -30,9 +32,9 @@ const create = async (data: Partial<Project>) => {
       },
       
     })
-    if (!createdProject.ok) throw new Error("failed to create project")
+    if (!createdTicket.ok) throw new Error("failed to create ticket")
 
-    return await createdProject.json()
+    return await createdTicket.json()
   } catch (error) {
     console.error(error)
   }
@@ -40,34 +42,34 @@ const create = async (data: Partial<Project>) => {
 
 const list = async () => {
     try {
-        const fetchProjects = await fetch(url, {   
+        const fetchTickets = await fetch(url, {   
         })
-        if (!fetchProjects.ok) throw new Error("failed to fetch projects")
-        const projects = await fetchProjects.json()
-        return validateProject(projects.data)
+        if (!fetchTickets.ok) throw new Error("failed to fetch tickets")
+        const tickets = await fetchTickets.json()
+        return validateProject(tickets.data)
     } catch (error) {
         console.log(error)
     }
 }
 
 const listProjects = async (): Promise <{
-    data: (Project & {projects: Project[]}) []
+    data: (Ticket & {tickets: Ticket[]}) []
 }> => {
     try {
         const response = await fetch(url, {
            
         })
-        if(!response.ok) throw new Error("Failed to fetch projects")
+        if(!response.ok) throw new Error("Failed to fetch tickets")
             const projectData = await response.json()
-        const projects = validateProject(projectData.data)
+        const tickets = validateProject(projectData.data)
 
-        if (!projects.success) return {data: []}
+        if (!tickets.success) return {data: []}
         const data = await Promise.all(
-            projects.data.map(async (project) => {
-                const projectResponse = await fetch(`${url}/${project.id}/projects`, {
+            tickets.data.map(async (ticket) => {
+                const projectResponse = await fetch(`${url}/${ticket.id}/tickets`, {
                     
                 })
-                if (!projectResponse.ok) throw new Error("failed to fetch projects")
+                if (!projectResponse.ok) throw new Error("failed to fetch tickets")
                     return await projectResponse.json()
             })
         )
@@ -79,7 +81,7 @@ const listProjects = async (): Promise <{
 }
 
 
-const update = async (id: string, data: Partial<Project>) => {
+const update = async (id: string, data: Partial<Ticket>) => {
   try {
     const updateProject = await fetch(`${url}/${id}`, {
       method: "PATCH",

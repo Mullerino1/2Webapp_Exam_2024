@@ -1,28 +1,27 @@
+"use client"
 
-import useProjectReducerForm from "@/hooks/useProjectReducerForm";
-import type { Project } from "./Types";
+import useProjectReducerForm from "@/hooks/useTicketReducerForm";
+import type { Ticket } from "./Types";
 
-type ProjectIdeaProps = {
-  onSubmit: (id: string | undefined, data: Partial<Project>) => void
-  project?: Project
+type TicketIdeaProps = {
+  onSubmit: (id: string | undefined, data: Partial<Ticket>) => void
+  ticket?: Ticket
 }
 
-export default function ProjectForm(props: Readonly<ProjectIdeaProps>) {
-  const { onSubmit, project } = props
-  const isEditing = !!project
+export default function TicketForm(props: Readonly<TicketIdeaProps>) {
+  const { onSubmit, ticket } = props
+  const isEditing = !!ticket
 
   const { handleSubmit, getFieldProps, isFieldInvalid } = useProjectReducerForm({
     initialFields: { 
-      title: project?.title ?? "",
-      description: project?.description ?? "",
-      id: project?.id ?? "",
-      date: project?.createdAt ?? "" 
+      title: ticket?.title ?? "",
+      description: ticket?.description ?? "",
+      date: ticket?.createdAt ?? "" 
     },
-    onSubmit: (data) => onSubmit(project?.id, data),
+    onSubmit: (data) => onSubmit(ticket?.title, data),
     validate: {
       title: (_, value) => value.length > 2,
       description: (_, value) => value.length > 5, 
-      id: (_, value) => value.trim() !== "", 
       date: (_, value) => !!Date.parse(value) 
     },
   })
@@ -39,12 +38,12 @@ export default function ProjectForm(props: Readonly<ProjectIdeaProps>) {
   }
 
   return (
-    <section className="project-ideas" data-testid="project-idea">
+    <section className="YourTicket" data-testid="ticket-idea">
       <h3>{isEditing ? labels.edit.title : labels.add.title}</h3>
       
       <form onSubmit={handleSubmit}>
         <div className="title field">
-          <label htmlFor="title">Project Name:</label>
+          <label htmlFor="title">Your Full Name</label>
           <input
             type="text"
             name="title"
@@ -60,28 +59,28 @@ export default function ProjectForm(props: Readonly<ProjectIdeaProps>) {
         </div>
 
         <section>
-          <label htmlFor="description">Describe your project:</label>
+          <label htmlFor="description">Email:</label>
           <input
             id="description"
             type="text"
             name="description"
-            placeholder="Describe your project"
+            placeholder="Describe your ticket"
             {...getFieldProps("description")}
           />
         </section>
 
-        <section>
+        {/* <section>
           <label htmlFor="id">Project ID:</label>
           <input
             id="id"
             type="text"
             name="id"
-            placeholder="Enter project ID"
+            placeholder="Enter ticket ID"
             {...getFieldProps("id")}
           />
-        </section>
+        </section> */}
 
-        <section>
+        {/* <section>
           <label htmlFor="date">Project Date:</label>
           <input
             id="date"
@@ -89,7 +88,7 @@ export default function ProjectForm(props: Readonly<ProjectIdeaProps>) {
             name="date"
             {...getFieldProps("date")}
           />
-        </section>
+        </section> */}
 
         <div>
           <button type="submit" id="submit" className="success">
