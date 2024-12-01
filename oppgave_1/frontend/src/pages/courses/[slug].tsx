@@ -1,5 +1,3 @@
-"use client"
-
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import { courses, users } from '@/data/data';
@@ -10,13 +8,32 @@ import "../../styles/tailwind/main.css";
 import { ofetch } from 'ofetch';
 import { baseUrl, endpoints } from '@/lib/config/urls';
 
-let initialized = false;
+interface Course {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+}
+
+let initialized = false
+
+const getCourses = async (): Promise<Course[]> => {
+  try {
+    const data = await ofetch(baseUrl + endpoints.courses);
+    
+    return data['data'];
+    
+  } catch (error) {
+    console.error("Unable to fetch data:", error);
+    return [];
+  }
+};
 
 const getCourse = async (slug) => {
   const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
+  console.log(data)
   const courses = await data['data'].filter((course) => course.slug === slug);
-  console.log(data['data'][0].slug)
-  console.log(slug)
   console.log(courses)
   return courses?.[0];
 };
@@ -45,17 +62,15 @@ const getLesson = async (courseSlug, lesson_slug) => {
 
 export default function CoursePage() {
   const router = useRouter()
-  const [content, setContent] = useState(null);
-  const [course, setCourse] = useState()
+  const { slug } = router.query
+  const [content, setContent] = useState(getCourse("javascript-101"));
+  const [course, setCourse] = useState(getCourse("javascript-101"));
   
   useEffect(() => {
     if (!initialized) {
       initialized = true;
       const fetchData = async () => {
-        const { slug } = router.query
-        console.log("Slug is: " + slug)
-        const data = await getCourse(slug)
-        console.log(data)
+        const data = getCourse(slug)
         setCourse(data);
       };
       fetchData();
