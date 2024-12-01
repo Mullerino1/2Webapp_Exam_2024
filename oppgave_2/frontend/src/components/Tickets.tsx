@@ -36,7 +36,7 @@ export default function Tickets(
       <form className="form">
         <section className="YourTicket">
           <h2>Your Ticket</h2>
-          {children}
+          {/* {children}
           <article>
             {tickets.length === 0 ? (
               <p>You have no projects</p>
@@ -68,8 +68,8 @@ export default function Tickets(
                 )
               })
             )}
-          </article>
-        </section>
+          </article> */}
+        </section> 
       </form>
       <TicketForm key={editing?.id} onSubmit={onSubmit} ticket={editing} />
     </>

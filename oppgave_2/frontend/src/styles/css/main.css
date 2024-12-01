@@ -48,18 +48,12 @@ header {
   text-align: justify;
 }
 
- /* nav:hover ul li {
-  margin: 0 15px;
-  background-color: #03DAC6;
-  color: #121212;
-} */
 
 
-
-main {
-  margin-left: 270px;
-  padding: 40px;
+header h1{
+  text-align: center;
 }
+
 
 main article{
   background-color: #121212;

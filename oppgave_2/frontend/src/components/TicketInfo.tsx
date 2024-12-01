@@ -64,31 +64,23 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             id="description"
             type="text"
             name="description"
-            placeholder="Describe your ticket"
+            placeholder="your email"
             {...getFieldProps("description")}
           />
         </section>
 
-        {/* <section>
-          <label htmlFor="id">Project ID:</label>
+        <section>
+          <label htmlFor="description">Tlf:</label>
           <input
-            id="id"
+            id="description"
             type="text"
-            name="id"
-            placeholder="Enter ticket ID"
-            {...getFieldProps("id")}
+            name="description"
+            placeholder="Your phone number"
+            {...getFieldProps("description")}
           />
-        </section> */}
+        </section>
 
-        {/* <section>
-          <label htmlFor="date">Project Date:</label>
-          <input
-            id="date"
-            type="date"
-            name="date"
-            {...getFieldProps("date")}
-          />
-        </section> */}
+        
 
         <div>
           <button type="submit" id="submit" className="success">
