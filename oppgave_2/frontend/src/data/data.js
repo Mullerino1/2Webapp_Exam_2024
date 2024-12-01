@@ -5,6 +5,10 @@ export const events = [
       slug: 'Rammstein',
       description:
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
+        location: 'Østfold',
+        date: '02/10/2025',
+        price: '250kr',
+        seats: '500',
       arrangements: [
         {
           id: '1',

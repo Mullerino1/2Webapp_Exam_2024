@@ -60,7 +60,7 @@ export default function EventPage() {
 
     <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
     <aside className="border-r border-slate-200 pr-6">
-    <h3 className="mb-4 text-base font-bold">Events</h3>
+    {/* <h3 className="mb-4 text-base font-bold">Events</h3> */}
           {/* <ul data-testid="lessons">
             {event?.arrangements?.map((arrangement) => (
               <li
@@ -68,15 +68,15 @@ export default function EventPage() {
                     arrangementSlug === arrangement.slug ? "bg-emerald-300" : "bg-transparent"
                 }`}
                 key={arrangement.id}
-              >
+              > */}
                 <Link
                   
-                  data-slug={arrangementSlug}
-                  className="block h-full w-full"
-                  href={`/events/${event.slug}/ArrangementPage/${arrangement.slug}`}
+                  
+                  href={`/EventsPage`}
                 >
-                  {arrangement.title}
+                  <h3 className="mb-4 text-base font-bold">Events</h3>
                 </Link>
+                {/*
               </li>
             ))}
           </ul>  */}
@@ -92,6 +92,11 @@ export default function EventPage() {
               <h2 className="text-2xl font-bold" data-testid="course_title">
                 {event.title}
               </h2>
+              <section className='EventInformation'>
+              <h4>[{event.category}]</h4>
+              <p>the price is {event.price}, we have {event.seats} seats</p>
+              <p>{event.location}</p>
+              </section>
               <p
                 className="mt-4 font-semibold leading-relaxed"
                 data-testid="course_description"
