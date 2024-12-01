@@ -14,26 +14,29 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
 
   const { handleSubmit, getFieldProps, isFieldInvalid } = useProjectReducerForm({
     initialFields: { 
-      title: ticket?.title ?? "",
-      description: ticket?.description ?? "",
+      // title: ticket?.title ?? "",
+      email: ticket?.email ?? "",
+      number: ticket?.number ?? "",
+      people: ticket?.people ?? "1",
+      name: ticket?.name ?? "",
   
     },
     onSubmit: (data) => onSubmit(ticket?.title, data),
     validate: {
-      title: (_, value) => value.length > 2,
-      description: (_, value) => value.length > 5, 
+      name: (_, value) => value.length > 2,
+      email: (_, value) => value.length > 5, 
+      number: (_, value) => value.length > 8,
+      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT
+      
      
     },
   })
 
   const labels = {
-    // edit: {
-    //   title: "Edit Project Title",
-    //   submit: "Update Project",
-    // },
+  
     add: {
-      title: "Add a New Project",
-      submit: "Add Project",
+      title: "Your Ticket",
+      submit: "Purchase ticket",
     },
   }
 
@@ -46,39 +49,59 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
           <label htmlFor="title">Your Full Name</label>
           <input
             type="text"
-            name="title"
+            name="name"
             id="title"
-            className={!isFieldInvalid("title") ? "success" : ""}
+            className={!isFieldInvalid("name") ? "success" : ""}
             required
-            placeholder="Add title"
-            {...getFieldProps("title")}
+            placeholder="Your Full Name"
+            {...getFieldProps("name")}
           />
-          {isFieldInvalid("title") && (
+          {isFieldInvalid("name") && (
             <p className="field-error error">Needs three letters</p>
           )}
         </div>
 
-        <section>
-          <label htmlFor="description">Email:</label>
+        <div>
+          <label htmlFor="email">Email:</label>
           <input
-            id="description"
+            id="email"
             type="text"
-            name="description"
+            name="email"
             placeholder="your email"
-            {...getFieldProps("description")}
+            {...getFieldProps("email")}
           />
-        </section>
+        </div>
 
-        <section>
-          <label htmlFor="description">Tlf:</label>
+        <div>
+          <label htmlFor="number">Tlf:</label>
           <input
-            id="description"
+            id="number"
             type="text"
-            name="description"
+            name="number"
             placeholder="Your phone number"
-            {...getFieldProps("description")}
+            {...getFieldProps("number")}
           />
-        </section>
+        </div>  
+
+        {/* ChatGPT, wasnt sure how to set this up. */}
+         <div>
+          <label htmlFor="people">Number of People:</label>
+          <select
+            id="people"
+            name="people"
+            {...getFieldProps("people")}
+            className={!isFieldInvalid("people") ? "success" : ""}
+          >
+            {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+          {isFieldInvalid("people") && (
+            <p className="field-error error">Select a number between 1 and 10</p>
+          )}
+        </div>
 
         
 

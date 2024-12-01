@@ -4,7 +4,6 @@
 import { useState, type FormEvent } from "react";
 import type { Ticket } from "@/components/Types";
 
-// Define types for FieldState and the form's props
 type FieldState = {
   value: string
   isValid: boolean
@@ -20,7 +19,6 @@ type UseFormProps<T> = {
   }
 }
 
-// A generalized useForm hook that we can use for Project or any other form
 export function useTicketForm<T extends Record<string, string>>({
   initialFields,
   onSubmit,

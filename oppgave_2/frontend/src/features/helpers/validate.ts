@@ -11,6 +11,10 @@ const projectSchema = z.object({
     tags: z.array(z.string()),
     date: z.string().datetime(),
     slug: z.string(),
+    email: z.string(),
+    number: z.string(),
+    people: z.string(),
+    name: z.string(),
   
     
 })

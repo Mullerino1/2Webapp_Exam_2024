@@ -29,7 +29,7 @@ export function useTickets(){
       initialized = true
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000")
+        const response = await fetch("http://localhost:4000")
         const data = await response.json()
         setData(data.data)
       } catch (error) {
@@ -69,11 +69,11 @@ export function useTickets(){
 
   const add = async (data: Partial<TicketType>) => {
     console.log(data + '2')
-    const { title = "", description = "", createdAt="", updatedAt = "" }  = data
+    const { title = "", description = "", name = "", email = "", number = "", people = ""}  = data
 
     try {
       setStatus("loading")
-      await projectApi.create({ title, description, createdAt, updatedAt})
+      await projectApi.create({ title, description, name, email, number, people})
       await fetchData()
       setStatus("success")
     } catch (error) {
@@ -84,38 +84,10 @@ export function useTickets(){
     }
   }
 
-  const remove = async(id: string) => {
-    try {
-      setStatus("loading")
-      await projectApi.remove(id)
-      await fetchData()
-      setStatus("success")
-    } catch (error) {
-      setStatus("error")
-      setError("failed to remove project")
-    } finally  {
-      resetToIdle
-    }
-  }
 
-  const update = async (id: string, data: Partial<TicketType>) => {
-    try {
-      setStatus("loading")
-      await projectApi.update(id, data)
-      await fetchData()
-      setStatus("success")
-    } catch (error) {
-      setStatus("error")
-      setError("failed to update the project")
-    } finally {
-      resetToIdle()
-    }
-  }
 
   return {
     add,
-    remove,
-    update,
     get: fetchData,
     data,
     error,
