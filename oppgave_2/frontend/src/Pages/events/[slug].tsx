@@ -60,7 +60,7 @@ export default function EventPage() {
 
     <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
     <aside className="border-r border-slate-200 pr-6">
-    {/* <h3 className="mb-4 text-base font-bold">Events</h3> */}
+      {/* <h3 className="mb-4 text-base font-bold">Events</h3> */}
           {/* <ul data-testid="lessons">
             {event?.arrangements?.map((arrangement) => (
               <li
