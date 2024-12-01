@@ -31,4 +31,6 @@ phonenumber       String
 email             String
 event_id          Int
 approved          String
+
+event   Events @relation(fields: [event_id], references: [id], name: "EventCustomers", onDelete: Cascade)
 }
