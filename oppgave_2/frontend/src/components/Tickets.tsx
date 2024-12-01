@@ -35,7 +35,7 @@ export default function Tickets(
     <>
       <form className="form">
         <section className="YourTicket">
-          <h2>Your Ticket</h2>
+          {/* <h2>Your Ticket</h2> */}
           {/* {children}
           <article>
             {tickets.length === 0 ? (
