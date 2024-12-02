@@ -9,7 +9,7 @@ const [deleting, setDeleting] = useState(false)
 function handleRemove() {
     setDeleting(true)
 
-    fetch (`/api/courses/${props.courseId}`, {
+    fetch (`/api/courses/${props.courseId}`, { //need the right API stuffs here
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
