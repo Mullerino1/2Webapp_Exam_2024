@@ -13,7 +13,7 @@ import { URLS } from "@/config/urls";
 const getEvent = async (slug) => {
   const data = await ofetch(URLS.events)
   const events = data.filter((event) => event.slug === slug);
-  return data?.[0];
+  return events.data;
 };
 
 const getArrangement = async (eventSlug, arrangementSlug) => {

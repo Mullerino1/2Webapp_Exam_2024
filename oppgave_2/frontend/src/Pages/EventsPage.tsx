@@ -5,23 +5,28 @@ import Layout from "@/layout/Layout";
 import Link from "next/link"
 import "../styles/css/main.css"
 import {categories, events } from "../data/data";
+import { ofetch } from "ofetch";
+import { URLS } from "@/config/urls";
 
+let initialized = false;
 
-const getEvent = async (slug) => {
-    const data = await events.filter((event) => event.slug === slug);
-    return data?.[0];
+const getEvents = async () => {
+    const data = await ofetch(URLS.events)
+    const events = data
+    return events.data;
   };
   
 
 
 export default function Events() {
     const [value, setValue] = useState("");
-    const [data, setData] = useState(events);
+    const [data, setData] = useState([]);
   
-    const handleFilter = (event) => {
+    const handleFilter = async (event) => {
       const category = event.target.value;
       setValue(category);
       if (category && category.length > 0) {
+        const events = await getEvents();
         const content = events.filter((event) =>
           event.category.toLocaleLowerCase().includes(category.toLowerCase())
         );
@@ -30,6 +35,18 @@ export default function Events() {
         setData(events);
       }
     };
+
+    useEffect(() => {
+      if (!initialized) {
+      initialized = true;
+      const fetchData = async () => {
+        const data = await getEvents();
+        setData(data);
+      };
+      
+      fetchData();
+    }
+    }, []);
   
     return (
       <>
