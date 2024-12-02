@@ -121,7 +121,7 @@ export default function Lesson({ courseSlug, lessonSlug }) {
                 className="block text-right capitalize"
               />
             </label>
-            <button type="submit" className="bg-green-500">Submit</button>
+            <button type="submit" className="bg-green-400 outline outline-black outline-1">Submit</button>
           </form>
           {formError && <p>Please fill out all fields</p>}
           {success && <p>Comment added!</p>}
