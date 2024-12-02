@@ -5,6 +5,7 @@ import { ofetch } from "ofetch";
 import { baseUrl, endpoints } from "@/lib/config/urls";
 
 import { categories } from "../data/data";  // Assuming you have categories available
+import DeleteCourse from "@/components/DeleteCourse";
 
 interface Course {
   id: string;
@@ -95,6 +96,9 @@ export default function Courses() {
               key={course.id}
               data-testid="course_wrapper"
             >
+              <span className="block text-right capitalize">
+                <DeleteCourse courseId={course.id} />
+                </span>
               <span className="block text-right capitalize">
                 [{course.category}]
               </span>
