@@ -102,8 +102,7 @@ export default function CoursePage() {
           <article>
             <Lesson 
                 courseSlug={course.slug} 
-                lessonSlug={lessonSlug} 
-/>
+                lessonSlug={lessonSlug} />
           </article>
         ) : (
           <section>
@@ -113,8 +112,7 @@ export default function CoursePage() {
               </h2>
               <p
                 className="mt-4 font-semibold leading-relaxed"
-                data-testid="course_description"
-              >
+                data-testid="course_description">
                 {course.description}
               </p>
             </>

@@ -93,16 +93,16 @@ export default function Lesson({ courseSlug, lessonSlug }) {
   if (!lesson) return <div>Loading lesson...</div>;
 
   return (
-    <Layout>
+    <>
       <div>
         <h2 className="text-2xl font-bold">{lesson.title}</h2>
         <p>{lesson.description}</p>
         {lesson.text?.map((textBlock, index) => (
           <p key={index}>{textBlock.text}</p>
         ))}
-
+</div>
         <section>
-          <h4>Comments ({comments.length})</h4>
+          <h4 className="text-1xl font-bold">Comments ({comments.length})</h4>
           <form onSubmit={handleSubmit}>
             <label>
               Name:
@@ -110,6 +110,7 @@ export default function Lesson({ courseSlug, lessonSlug }) {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                 className="block text-right capitalize"
               />
             </label>
             <label>
@@ -117,22 +118,23 @@ export default function Lesson({ courseSlug, lessonSlug }) {
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
+                className="block text-right capitalize"
               />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" className="bg-green-500">Submit</button>
           </form>
           {formError && <p>Please fill out all fields</p>}
           {success && <p>Comment added!</p>}
 
           <ul>
             {comments.map((c) => (
-              <li key={c.id}>
+              <li key={c.id} className="outline outline-black outline-1 ">
                 <strong>{c.created_by.name}:</strong> {c.comment}
               </li>
             ))}
           </ul>
         </section>
-      </div>
-    </Layout>
+      
+    </>
   );
 }
