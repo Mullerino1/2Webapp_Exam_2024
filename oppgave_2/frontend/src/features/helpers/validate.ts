@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export {projectSchema, projectsSchema } 
+export {ticketSchema, ticketsSchema } 
 
-const projectSchema = z.object({
+const ticketSchema = z.object({
     title: z.string(),
     description: z.string(),
     publishedAt: z.string().datetime(),
@@ -19,8 +19,8 @@ const projectSchema = z.object({
     
 })
 
-const projectsSchema = z.array(projectSchema)
+const ticketsSchema = z.array(ticketSchema)
 
-export function validateProject(data: unknown) {
-    return projectsSchema.safeParse(data)
+export function validateTicket(data: unknown) {
+    return ticketsSchema.safeParse(data)
 }

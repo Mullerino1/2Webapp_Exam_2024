@@ -71,7 +71,6 @@ export default function EventPage() {
           </article>    
         ) : (
           <section>
-          
               <h2 className="text-2xl font-bold" data-testid="course_title">
                 {event.title}
               </h2>

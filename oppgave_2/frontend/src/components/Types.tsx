@@ -2,7 +2,7 @@
 
 
 import type { z } from "zod"
-import type {projectSchema} from "@/features/helpers/validate";
+import type {ticketSchema} from "@/features/helpers/validate";
 
 
 export const actions = {
@@ -11,7 +11,7 @@ export const actions = {
   
 } as const
 
-export type HandleProjectProps =
+export type HandleTicketProps =
 
   | {
       action: typeof actions.add
@@ -19,10 +19,10 @@ export type HandleProjectProps =
     
     }
 
-export type HandleProject = (props: HandleProjectProps) => void
+export type HandleTicket = (props: HandleTicketProps) => void
 
 export type Action = typeof actions
 
-export type Ticket = z.infer<typeof projectSchema>
+export type Ticket = z.infer<typeof ticketSchema>
 
 
