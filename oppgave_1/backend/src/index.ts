@@ -62,9 +62,16 @@ app.get(courseslink, async (c) => {
       },
     });
 
+    //Løste med chatgpt, men prøver å forstå så godt jeg kan
     const data = courses.map(course => ({
       ...course, // Spread the individual `course` object
-      lessons: course.lessons.map(lesson => lesson.lesson),  // Convert lessons to an array of strings
+      lessons: course.lessons.map(lesson => ({
+        id: lesson.id,
+        slug: lesson.slug,
+        title: lesson.title,
+        description: lesson.description,
+        text: lesson.text,
+      })),  // Extract necessary fields from lessons
     }));
 
     if (data.length > 0) {

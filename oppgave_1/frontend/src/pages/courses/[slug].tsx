@@ -32,9 +32,9 @@ const getCourses = async (): Promise<Course[]> => {
 
 const getCourse = async (slug) => {
   const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
-  console.log(data)
+  console.log("Fetched data" + JSON.stringify(data))
   const courses = await data['data'].filter((course) => course.slug === slug);
-  console.log(courses)
+  console.log("Filtered Courses: " + JSON.stringify(courses))
   return courses?.[0];
 };
   
@@ -63,19 +63,19 @@ const getLesson = async (courseSlug, lesson_slug) => {
 export default function CoursePage() {
   const router = useRouter()
   const { slug } = router.query
-  const [content, setContent] = useState(getCourse("javascript-101"));
-  const [course, setCourse] = useState(getCourse("javascript-101"));
+  const [content, setContent] = useState();
+  const [course, setCourse] = useState<Course | null>(null);
   
   useEffect(() => {
-    if (!initialized) {
+    if (!slug || initialized) return;
       initialized = true;
       const fetchData = async () => {
-        const data = getCourse(slug)
+        const data = await getCourse(slug)
         setCourse(data);
       };
       fetchData();
     }
-  }, []);
+  , [slug]);
 
   
   if (!course) {
@@ -92,6 +92,12 @@ export default function CoursePage() {
 //     };
 //     getContent();
 //   }, [courseSlug]);
+
+  if (!slug) return (
+    <>
+    Loading...
+    </>
+  )
 
   return (
     
