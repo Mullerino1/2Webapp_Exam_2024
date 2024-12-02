@@ -1,3 +1,4 @@
+//Code used here is from class, previous deliveries and some AI
 "use client"
 
 import useProjectReducerForm from "@/hooks/useTicketReducerForm";
@@ -26,14 +27,12 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
       name: (_, value) => value.length > 2,
       email: (_, value) => value.length > 5, 
       number: (_, value) => value.length > 8,
-      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT
-      
-     
+      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT wasnt sure on how to set it up
+      //people can also possibly deleted
     },
   })
 
   const labels = {
-  
     add: {
       title: "Your Ticket",
       submit: "Purchase ticket",
@@ -102,9 +101,6 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             <p className="field-error error">Select a number between 1 and 10</p>
           )}
         </div>
-
-        
-
         <div>
           <button type="submit" id="submit" className="success">
             { labels.add.submit}

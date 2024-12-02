@@ -13,29 +13,20 @@ import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
 
 //Slug setup was mainly found from this website https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes and form the class courses
 
-const getEvents = async (slug) => {
-    const data = await events.filter((event) => event.slug === slug);
-    return data?.[0];
-  };
-  
-
 
 export default function EventPage() {
   const router = useRouter()
   const { slug } = router.query
-  
-  
  
   const event = events.find(c => c.slug === slug)
 
-  
   if (!event) {
     return <div>Event not found</div>
   }
 
   const arrangementSlug = "";
 
-  const { add, status, get, data, error } = useTicket();
+  const { add, data } = useTicket();
   const tickets = data;
 
   const handleProjectMutation: HandleProject = (props) => {
@@ -64,16 +55,12 @@ export default function EventPage() {
   
 
   return (
-    
     <Layout>
-
-    <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
-      
+    <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16"> 
     <aside className="border-r border-slate-200 pr-6">
-     
-                <Link href={`/EventsPage`}>
-                  <h3 className="mb-4 text-base font-bold">Events</h3>
-                </Link>
+         <Link href={`/EventsPage`}>
+          <h3 className="mb-4 text-base font-bold">Events</h3>
+         </Link>
         </aside>
         {arrangementSlug ? (
       <article>
@@ -81,7 +68,7 @@ export default function EventPage() {
           </article>    
         ) : (
           <section>
-            <>
+            
               <h2 className="text-2xl font-bold" data-testid="course_title">
                 {event.title}
               </h2>
@@ -96,19 +83,10 @@ export default function EventPage() {
                 {event.description}
               </p>
               </section>
-           
-              
-              <Project
-        tickets={tickets}
-        handleProjectMutation={handleProjectMutation}
-      >
-      </Project>
-            </>
+              <Project tickets={tickets} handleProjectMutation={handleProjectMutation}></Project>  
           </section>
         )}
-      
     </div>
-    
     </Layout>  
   )
 }

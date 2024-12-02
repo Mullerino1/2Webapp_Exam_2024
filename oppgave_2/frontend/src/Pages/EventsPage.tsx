@@ -1,25 +1,10 @@
 "use client"
 
-
-
 import { useState, useEffect } from "react";
 import Layout from "@/layout/Layout";
 import Link from "next/link"
 import "../styles/css/main.css"
-
-import {
-  categories,
-  events,
-} from "../data/data";
-
-import { useParams, useRouter } from "next/navigation";
-
-const getEvent = async (slug) => {
-    const data = await events.filter((event) => event.slug === slug);
-    return data?.[0];
-  };
-  
-
+import { categories, events} from "../data/data";
 
 export default function Events() {
     const [value, setValue] = useState("");
@@ -63,32 +48,40 @@ export default function Events() {
               ))}
             </select>
           </label>
+          <label htmlFor="filter">
+            <span>Event Date</span>
+            <select
+              id="filter"
+              name="filter"
+              data-testid="filter"
+              value={value}
+              onChange={handleFilter}
+              className="min-w-[200px] rounded bg-slate-200"
+            >
+              <option value="">All Dates</option> 
+              {/* needs to be made into the different date fromats based on onth and year. */}
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
         </header>
         <section>
           {data && data.length > 0 ? (
             data.map((event) => (
-              <article
-                
-                key={event.id}
-                
-              >
+              <article key={event.id}>
                 <span>
                   [{event.category}]
                 </span>
-                <h3
-                
-                >
+                <h3>
                   <Link href={`/events/${event.slug}`}>{event.title}</Link>
                 </h3>
-                <p
-                
-                >
+                <p>
                   {event.description}
                 </p>
-                <Link
-                 
-                  href={`/events/${event.slug}`}
-                >
+                <Link href={`/events/${event.slug}`}>
                   To Event
                 </Link>
               </article>

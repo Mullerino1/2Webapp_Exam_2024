@@ -1,19 +1,9 @@
 "use client"
 
-
-
 import { useState, useEffect } from "react";
 import Link from "next/link"
 import Layout from "@/layout/Layout";
-
-import {
-  categories,
-  comments,
-  courseCreateSteps,
-  events,
-  users,
-} from "../data/data";
-
+import {events } from "../data/data";
 import { useRouter } from "next/router";
 
 const getEvent = async (slug) => {
@@ -21,9 +11,7 @@ const getEvent = async (slug) => {
   return data?.[0];
 };
 
-
-
-const getLesson = async (eventSlug, arrangementSlug) => {
+const getArrangement = async (eventSlug, arrangementSlug) => {
   const data = await events
     .flatMap(
       (event) =>
@@ -35,30 +23,21 @@ const getLesson = async (eventSlug, arrangementSlug) => {
 };
 
 
-
 export default function Arrangement() {
-
-    const [comment, setComment] = useState("");
-    const [name, setName] = useState("");
-    const [lesson, setLesson] = useState(null);
-    const [course, setCourse] = useState(null);
+    const [arrangement, setArrangement] = useState(null);
+    const [event, setEvent] = useState(null);
     const eventSlug = "";
     const arrangementSlug = "";
 
     const router = useRouter()
     const { slug } = router.query
     
-  
-
-  
     useEffect(() => {
       const getContent = async () => {
         const arrangementDate = await getArrangement(eventSlug, arrangementSlug);
         const eventData = await getEvent(eventSlug, arrangementSlug);
-        // const commentsData = await getComments(lessonSlug);
-        setLesson(arrangementDate);
-        setCourse(eventData);
-        // setComments(commentsData);
+        setArrangement(arrangementDate);
+        setEvent(eventData);
       };
       getContent();
     }, [eventSlug, arrangementSlug]);

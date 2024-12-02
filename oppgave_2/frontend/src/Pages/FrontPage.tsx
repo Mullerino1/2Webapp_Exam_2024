@@ -8,7 +8,7 @@ import useTicket from "../hooks/useTickets";
 import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
 
 export default function FrontPage() {
-  const { add, status, get, data, error } = useTicket();
+  const { add, data } = useTicket();
   const tickets = data;
 
   const handleProjectMutation: HandleProject = (props) => {
