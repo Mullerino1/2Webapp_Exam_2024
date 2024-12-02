@@ -75,9 +75,8 @@ export default function Lesson({ courseSlug, lessonSlug }) {
     }
 
     await createComment({
-      id: `${Math.floor(Math.random() * 1000 + 1)}`,
-      createdBy: {
-        id: Math.floor(Math.random() * 1000 + 1),
+      created_by: {
+        id: Date.now(),
         name,
       },
       comment,

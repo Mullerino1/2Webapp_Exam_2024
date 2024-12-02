@@ -4,7 +4,7 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { PrismaClient } from '@prisma/client'
-import { date, z } from "zod";
+import { date, z } from "zod"
 
 const postCourseSchema = z.object({
   title: z.string(),
@@ -26,9 +26,14 @@ const postLessonSchema = z.object({
   json: z.string(),
 })
 
+
+
 const postCommentSchema = z.object({
   lesson_slug: z.string(),
-  created_by: z.string(),
+  created_by: z.object({
+    id: z.number(),
+    name: z.string()
+  }),
   comment: z.string()
 })
 
@@ -264,7 +269,7 @@ app.get(commentslink, async (c) => {
     });
     
     if (data.length > 0) {return c.json({success: true, data: data}, 200);}
-    else {{return c.json({success: true, data: data}, 204);}}
+    else {{return c.json({success: true, data: data}, 200);}}
   } catch (err) {
     console.error(`Error writing to database`, err);
     return c.json({success: true, error: `Error writing to database: ` + err}, 500);
@@ -273,27 +278,25 @@ app.get(commentslink, async (c) => {
 
 app.post(commentslink, async (c) => {
   let newComment;
-  const body = await c.req.formData();
-  const entries = body.entries();
+  const body = await c.req.json();
+  console.log(body)
   let comment;
   
-  for (let entry of entries) {
-    comment = JSON.parse(entry[1])
-  }
   const commentData = {
-  id: Date.now(),
-  lesson_slug: comment['lesson_slug'],
-  created_by: comment['created_by'],
-  comment: comment['description'],
+  lesson_slug: body['lesson_slug'],
+  created_by: body['created_by'],
+  comment: body['comment'],
   }
+  console.log(body['id'])
+  console.log(commentData.id)
 
   try {
     postCommentSchema.parse(commentData)
-    newComment = await prisma.courses.create({
+    newComment = await prisma.comments.create({
       data: {
-        id: Date.now(),
+        id: `${Date.now()}`,
         lesson_slug: commentData.lesson_slug,
-        created_by: commentData.created_by,
+        created_by: JSON.stringify(commentData.created_by),
         comment: commentData.comment,
       }
     })
