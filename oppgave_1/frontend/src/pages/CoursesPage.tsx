@@ -99,7 +99,7 @@ export default function Courses() {
               <span className="block text-right capitalize">
                 <DeleteCourse courseId={course.id} />
                 </span>
-              <span className="block text-right capitalize">
+              <span className="block text-left capitalize">
                 [{course.category}]
               </span>
               <h3 className="mb-2 text-base font-bold" data-testid="courses_title">
