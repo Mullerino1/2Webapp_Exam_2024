@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { Ticket as TicketType } from "@/components/Types";
 import projectApi from "@/lib/services/api"
 import { ofetch } from "ofetch";
+import { URLS } from "@/config/urls";
 
 
 
@@ -32,8 +33,8 @@ export function useTickets(){
       initialized = true
     const fetchData = async () => {
       try {
-        const response = await ofetch("localhost:3999/customers")
-        const data = await response.json()
+        const response = await ofetch(URLS.events)
+        const data = response
         setData(data.data)
       } catch (error) {
         console.error("Error fetching data from server", error)
@@ -92,7 +93,7 @@ export function useTickets(){
 
   return {
     add,
-    get: fetchData,
+    get: data,
     data,
     error,
     status: {
