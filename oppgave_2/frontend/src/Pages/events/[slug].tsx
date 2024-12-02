@@ -43,6 +43,7 @@ export default function EventPage() {
     initialized = true;
     const fetchData = async () => {
       const data = await getEvent(slug as string);
+      console.log(data)
       setEvent(data);
     };
     fetchData();
@@ -72,6 +73,11 @@ export default function EventPage() {
     }
   }
   
+  if (!slug) return (
+    <>
+    Loading...
+    </>
+  )
 
   return ( 
     <Layout>

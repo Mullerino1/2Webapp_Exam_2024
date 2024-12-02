@@ -16,8 +16,6 @@ const getEvents = async () => {
     return events.data;
   };
   
-
-
 export default function Events() {
     const [value, setValue] = useState("");
     const [data, setData] = useState([]);

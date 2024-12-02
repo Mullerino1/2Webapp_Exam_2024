@@ -52,6 +52,7 @@ export function useTickets(){
       []
   )
 
+  /*
    const fetchData = useCallback( async () => {
     try {
       setStatus("loading")
@@ -67,6 +68,7 @@ export function useTickets(){
     resetToIdle()
   }
 }, [resetToIdle])
+*/
 
 
   const add = async (data: Partial<TicketType>) => {
