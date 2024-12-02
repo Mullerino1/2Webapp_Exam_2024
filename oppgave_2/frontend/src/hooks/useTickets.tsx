@@ -55,7 +55,7 @@ export function useTickets(){
     try {
       setStatus("loading")
       const result = await projectApi.listProjects()
-
+      //possibly dont need parts in this code as we dont need to be listing the tickets anywhere else then havign them saved in the backend
       setData(result?.data ?? [])
 
       setStatus("success")
@@ -65,8 +65,6 @@ export function useTickets(){
     resetToIdle()
   }
 }, [resetToIdle])
-
-
 
 
   const add = async (data: Partial<TicketType>) => {

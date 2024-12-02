@@ -1,3 +1,4 @@
+//this shoudl be moved into th types folder
 "use client"
 
 
