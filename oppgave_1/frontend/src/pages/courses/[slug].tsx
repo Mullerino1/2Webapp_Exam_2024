@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Link from "next/link"
+import Link from "next/link";
 import { courses, users } from '@/data/data';
 import Layout from '@/components/Layout';
 import Lesson from '../LessonPage';
@@ -14,123 +14,97 @@ interface Course {
   slug: string;
   description: string;
   category: string;
+  lessons: Lesson[];
 }
 
-let initialized = false
+interface Lesson {
+  id: string;
+  title: string;
+  slug: string;
+}
+
+let initialized = false;
 
 const getCourses = async (): Promise<Course[]> => {
   try {
     const data = await ofetch(baseUrl + endpoints.courses);
-    
     return data['data'];
-    
   } catch (error) {
     console.error("Unable to fetch data:", error);
     return [];
   }
 };
 
-const getCourse = async (slug) => {
-  const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
-  console.log("Fetched data" + JSON.stringify(data))
-  const courses = await data['data'].filter((course) => course.slug === slug);
-  console.log("Filtered Courses: " + JSON.stringify(courses))
-  return courses?.[0];
-};
-  
-//   const createCourse = async (data) => {
-//     await courses.push(data);
-//   };
-  
-const getLesson = async (courseSlug, lesson_slug) => {
+const getCourse = async (slug: string) => {
   try {
     const data = await ofetch(baseUrl + endpoints.courses, { parseResponse: JSON.parse });
-    
-    // Flatten the lessons from all courses and filter for the desired one
-    const lessons = data
-      .flatMap((course) => 
-        course.slug === courseSlug ? course.lessons : [] // Only take lessons for the matched course
-      )
-      .filter((lesson) => lesson.slug === lesson_slug); // Filter for the desired lesson
-    
-    return lessons?.[0] || null; // Return the first matching lesson or null
+    const courses = await data['data'].filter((course) => course.slug === slug);
+    return courses?.[0];
   } catch (error) {
-    console.error("Error fetching lesson:", error);
-    return null; // Handle errors gracefully
+    console.error("Error fetching course:", error);
+    return null;
   }
 };
 
 export default function CoursePage() {
-  const router = useRouter()
-  const { slug } = router.query
-  const [content, setContent] = useState();
+  const router = useRouter();
+  const { slug } = router.query;
   const [course, setCourse] = useState<Course | null>(null);
-  
+  const [lessonSlug, setLessonSlug] = useState("");
+
   useEffect(() => {
     if (!slug || initialized) return;
-      initialized = true;
-      const fetchData = async () => {
-        const data = await getCourse(slug)
-        setCourse(data);
-      };
-      fetchData();
-    }
-  , [slug]);
+    initialized = true;
+    const fetchData = async () => {
+      const data = await getCourse(slug as string);
+      setCourse(data);
+    };
+    fetchData();
+  }, [slug]);
 
-  
   if (!course) {
-    return <div>Course not found</div>
+    return <div>Course not found</div>;
   }
-//   const courseSlug = "javascript-101";
-  const lessonSlug = "";
-  
 
-//   useEffect(() => {
-//     const getContent = async () => {
-//       const data = await getCourse(courseSlug);
-//       setContent(data);
-//     };
-//     getContent();
-//   }, [courseSlug]);
-
-  if (!slug) return (
-    <>
-    Loading...
-    </>
-  )
+  if (!slug) {
+    return <>Loading...</>;
+  }
 
   return (
-    
     <Layout>
-        
-    <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
-    <aside className="border-r border-slate-200 pr-6">
-    <h3 className="mb-4 text-base font-bold">Leksjoner</h3>
+      <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
+        <aside className="border-r border-slate-200 pr-6">
+          <h3 className="mb-4 text-base font-bold">Leksjoner</h3>
           <ul data-testid="lessons">
             {course?.lessons?.map((lesson) => (
               <li
-                className={`text-sm" mb-4 w-full max-w-[95%] rounded-lg border border-slate-300 px-4 py-2 ${
+                className={`text-sm mb-4 w-full max-w-[95%] rounded-lg border border-slate-300 px-4 py-2 ${
                   lessonSlug === lesson.slug ? "bg-emerald-300" : "bg-transparent"
                 }`}
                 key={lesson.id}
               >
-                <Link
+                <a
                   data-testid="lesson_url"
-                  data-slug={lessonSlug}
-                  className="block h-full w-full"
-                  href={`/courses/${course.slug}/LessonPage/${lesson.slug}`}
+                  className="block h-full w-full cursor-pointer"
+                  //Kunne sikkert tenkt meg fram til det, men fant denne med chatgpt
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setLessonSlug(lesson.slug);
+                  }}
                 >
                   {lesson.title}
-                </Link>
+                </a>
               </li>
             ))}
-          </ul> 
-         
+          </ul>
         </aside>
         {lessonSlug ? (
-      <article>
-            <Lesson />
-          </article>    
+          <article>
+            <Lesson 
+                courseSlug={course.slug} 
+                lessonSlug={lessonSlug} 
+/>
+          </article>
         ) : (
           <section>
             <>
@@ -159,7 +133,7 @@ export default function CoursePage() {
             ))}
           </ul>
         </aside>
-    </div>
-    </Layout>  
-  )
+      </div>
+    </Layout>
+  );
 }

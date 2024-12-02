@@ -255,17 +255,15 @@ app.post(lessonslink, async (c) => {
 
 app.get(commentslink, async (c) => {
   const lesson_slug = c.req.query('lesson_slug');
-
   if (!lesson_slug) {return c.json({ success: false, error: `lesson_slug is undefined.` }, 500);}
   try {
-    const comments = await prisma.comments.findMany({
+    const data = await prisma.comments.findMany({
       where: {
         lesson_slug: lesson_slug
       }
     });
-    const data = comments.map();
-    console.log(data);
-    if (data.size() > 0) {return c.json({success: true, data: data}, 200);}
+    
+    if (data.length > 0) {return c.json({success: true, data: data}, 200);}
     else {{return c.json({success: true, data: data}, 204);}}
   } catch (err) {
     console.error(`Error writing to database`, err);
