@@ -1,6 +1,6 @@
 "use client"
 
-import useProjectReducerForm from "@/hooks/useTicketReducerForm";
+import useTicketReducerForm from "@/hooks/useTicketReducerForm";
 import type { Ticket } from "./Types";
 
 type TicketIdeaProps = {
@@ -10,9 +10,9 @@ type TicketIdeaProps = {
 
 export default function TicketForm(props: Readonly<TicketIdeaProps>) {
   const { onSubmit, ticket } = props
-  const isEditing = !!ticket
+  // const isEditing = !!ticket
 
-  const { handleSubmit, getFieldProps, isFieldInvalid } = useProjectReducerForm({
+  const { handleSubmit, getFieldProps, isFieldInvalid } = useTicketReducerForm({
     initialFields: { 
       // title: ticket?.title ?? "",
       email: ticket?.email ?? "",
@@ -26,14 +26,13 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
       name: (_, value) => value.length > 2,
       email: (_, value) => value.length > 5, 
       number: (_, value) => value.length > 8,
-      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT
+      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT as I was unsure as to hwo to set this up
       
      
     },
   })
 
   const labels = {
-  
     add: {
       title: "Your Ticket",
       submit: "Purchase ticket",
@@ -43,7 +42,6 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
   return (
     <section className="YourTicket" data-testid="ticket-idea">
       <h3>{ labels.add.title}</h3>
-      
       <form onSubmit={handleSubmit}>
         <div className="title field">
           <label htmlFor="title">Your Full Name</label>
@@ -60,7 +58,6 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             <p className="field-error error">Needs three letters</p>
           )}
         </div>
-
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -71,7 +68,6 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             {...getFieldProps("email")}
           />
         </div>
-
         <div>
           <label htmlFor="number">Tlf:</label>
           <input
@@ -102,9 +98,6 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             <p className="field-error error">Select a number between 1 and 10</p>
           )}
         </div>
-
-        
-
         <div>
           <button type="submit" id="submit" className="success">
             { labels.add.submit}

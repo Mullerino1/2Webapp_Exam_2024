@@ -29,7 +29,7 @@ export default function Tickets(
          
         </section> 
       </form>
-      <TicketForm onSubmit={onSubmit} />
+      <TicketForm onSubmit={onSubmit}/>
     </>
   )
 }
