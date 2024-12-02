@@ -2,13 +2,13 @@ import { PrismaClient } from '@prisma/client'
 // https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding
 const prisma = new PrismaClient()
 async function main() {
-  const events = await prisma.courses.createMany({
+  const events = await prisma.events.createMany({
     data: [{
         id: 1,
         title: "Rammstein Concert",
         description: "A rammstein concert",
         slug: "Rammstein Concert",
-        date: {day: 10, month: 10, year: 2024},
+        date: JSON.stringify({day: 10, month: 10, year: 2024}),
         location: "Oslo",
         type: "Concert",
         seats: 69,
@@ -19,7 +19,7 @@ async function main() {
         title: "Marathon",
         description: "The longest run ever",
         slug: "Marathon",
-        date: {day: 14, month: 2, year: 2025},
+        date: JSON.stringify({day: 14, month: 2, year: 2025}),
         location: "Fredrikstad",
         type: "Marathon",
         seats: 1000,
@@ -30,7 +30,7 @@ async function main() {
         title: "Christmas Market",
         description: "A cozy Christmas Market",
         slug: "Christmas Market",
-        date: {day: 20, month: 12, year: 2024},
+        date: JSON.stringify({day: 20, month: 12, year: 2024}),
         location: "Bærum",
         type: "Social Event",
         seats: 1000,
@@ -61,3 +61,12 @@ async function main() {
         })
 
     }
+    main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
