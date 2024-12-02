@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Link from "next/link"
 import { ofetch } from "ofetch";
+import DeleteCourse from "@/components/RemoveCourse";
 
 import {
   categories,
@@ -108,6 +109,7 @@ export default function Courses() {
                 >
                   Til kurs
                 </Link>
+                <DeleteCourse courseId={course.id} />
               </article>
             ))
           ) : (
