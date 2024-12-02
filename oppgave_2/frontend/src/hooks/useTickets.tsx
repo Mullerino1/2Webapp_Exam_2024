@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Ticket as TicketType } from "@/components/Types";
 import projectApi from "@/lib/services/api"
+import { ofetch } from "ofetch";
 
 
 
@@ -31,7 +32,7 @@ export function useTickets(){
       initialized = true
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:4000")
+        const response = await ofetch("localhost:3999/customers")
         const data = await response.json()
         setData(data.data)
       } catch (error) {
@@ -56,6 +57,7 @@ export function useTickets(){
       setStatus("loading")
       const result = await projectApi.listProjects()
       //possibly dont need parts in this code as we dont need to be listing the tickets anywhere else then havign them saved in the backend
+      //Kim - Saving for next level step then
       setData(result?.data ?? [])
 
       setStatus("success")

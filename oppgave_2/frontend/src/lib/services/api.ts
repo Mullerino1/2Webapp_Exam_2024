@@ -3,8 +3,9 @@
 "use client"
 
 
-import { endpoints } from "@/config/urls";
+import { endpoints, URLS } from "@/config/urls";
 import type { Ticket } from "@/components/Types";
+import { ofetch } from "ofetch";
 // import { validateProject } from "@/features/helpers/validate";
 
 const url = endpoints
@@ -26,13 +27,9 @@ console.log(url)
 
 const create = async (data: Partial<Ticket>) => {
   try {
-    const createdTicket = await fetch(url, {
+    const createdTicket = await ofetch(URLS.customers, {
       method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      
+      body: data      
     })
     if (!createdTicket.ok) throw new Error("failed to create ticket")
 

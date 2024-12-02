@@ -1,10 +1,11 @@
 
 
-const API_URL = 'http://localhost:4000'
+const API_URL = 'http://localhost:3999'
+
 
 const URLS = {
-    frontpage: `${API_URL}/`,
-    projects: `${API_URL}/`,
+    events: `${API_URL}/events`,
+    customers: `${API_URL}/customers`,
 }
 
 export { URLS, API_URL as endpoints}

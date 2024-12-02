@@ -2,6 +2,7 @@
 
 
 import { useRouter } from 'next/router';
+import {useState, useEffect} from 
 import Link from "next/link"
 import Layout from '@/layout/Layout';
 import { events, users } from '@/data/data';
@@ -10,6 +11,7 @@ import Arrangement from '../ArrangementPage';
 import Project from "@/components/Tickets";
 import useTicket from '@/hooks/useTickets';
 import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
+import React, { useEffect } from 'react';
 
 //Slug setup was mainly found from this website https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes and form the class courses
 
@@ -26,6 +28,7 @@ export default function EventPage() {
   const event = events.find(c => c.slug === slug)
   const arrangementSlug = "";
   const { add, status, get, data, error } = useTicket();
+  const [event, setEvent] = useState("")
   const tickets = data;
 
   if (!event) {

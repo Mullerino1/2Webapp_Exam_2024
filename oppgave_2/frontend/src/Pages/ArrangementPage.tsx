@@ -7,14 +7,18 @@ import Link from "next/link"
 import Layout from "@/layout/Layout";
 import { events} from "../data/data";
 import { useRouter } from "next/router";
+import { ofetch } from "ofetch";
+import { URLS } from "@/config/urls";
 
 const getEvent = async (slug) => {
-  const data = await events.filter((event) => event.slug === slug);
+  const data = await ofetch(URLS.events)
+  const events = data.filter((event) => event.slug === slug);
   return data?.[0];
 };
 
 const getArrangement = async (eventSlug, arrangementSlug) => {
-  const data = await events
+  const data = await ofetch(URLS.events)
+  const events = data
     .flatMap(
       (event) =>
         event.slug === eventSlug &&

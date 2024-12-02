@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client'
 import { date, z } from "zod"
 
 const eventslink = "/events"
-const userslink = "/users"
+const customerslink = "/customers"
 
 console.log(`Server is running on port ${port}`);
 
@@ -71,23 +71,23 @@ app.post(eventslink, async (c) => {
   return c.json({success: true, message: `Successfully created the new course`}, 201);
 });
 
-app.post(userslink, async (c) => {
-  const user = await c.req.json();  
-  const userData = {
-  name: user['name'],
-  phonenumber: user['phonenumber'],
-  email: user['email'],
-  event_id: user['event_id']
+app.post(customerslink, async (c) => {
+  const customer = await c.req.json();  
+  const customerData = {
+  name: customer['name'],
+  phonenumber: customer['phonenumber'],
+  email: customer['email'],
+  event_id: customer['event_id']
   }
   
   try {
     const newUsers = await prisma.customers.create({
       data: {
         id: Date.now(),
-        name: userData.name,
-        phonenumber: userData.phonenumber,
-        email: userData.email,
-        event_id: userData.event_id,
+        name: customerData.name,
+        phonenumber: customerData.phonenumber,
+        email: customerData.email,
+        event_id: customerData.event_id,
         approved: false
       }
     })
