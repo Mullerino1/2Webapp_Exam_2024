@@ -29,14 +29,16 @@ export default function EventPage() {
   const event = events.find(c => c.slug === slug)
 
   
-  if (!event) {
-    return <div>Event not found</div>
-  }
+  
 
   const arrangementSlug = "";
 
   const { add, status, get, data, error } = useTicket();
   const tickets = data;
+
+  if (!event) {
+    return <div>Event not found</div>
+  }
 
   const handleProjectMutation: HandleProject = (props) => {
     const { action } = props;
