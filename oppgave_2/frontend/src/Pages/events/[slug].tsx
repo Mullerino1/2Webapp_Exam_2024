@@ -23,16 +23,8 @@ const getEvents = async (slug) => {
 export default function EventPage() {
   const router = useRouter()
   const { slug } = router.query
-  
-  
- 
   const event = events.find(c => c.slug === slug)
-
-  
-  
-
   const arrangementSlug = "";
-
   const { add, status, get, data, error } = useTicket();
   const tickets = data;
 
@@ -65,17 +57,13 @@ export default function EventPage() {
   }
   
 
-  return (
-    
+  return ( 
     <Layout>
-
     <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
-      
     <aside className="border-r border-slate-200 pr-6">
-     
-                <Link href={`/EventsPage`}>
-                  <h3 className="mb-4 text-base font-bold">Events</h3>
-                </Link>
+          <Link href={`/EventsPage`}>
+              <h3 className="mb-4 text-base font-bold">Events</h3>
+          </Link>
         </aside>
         {arrangementSlug ? (
       <article>
@@ -83,7 +71,7 @@ export default function EventPage() {
           </article>    
         ) : (
           <section>
-            <>
+          
               <h2 className="text-2xl font-bold" data-testid="course_title">
                 {event.title}
               </h2>
@@ -93,24 +81,14 @@ export default function EventPage() {
               <p>{event.location}</p>
               <p
                 className="mt-4 font-semibold leading-relaxed"
-                data-testid="course_description"
-              >
+                data-testid="course_description" >
                 {event.description}
               </p>
               </section>
-           
-              
-              <Project
-        tickets={tickets}
-        handleProjectMutation={handleProjectMutation}
-      >
-      </Project>
-            </>
+              <Project tickets={tickets} handleProjectMutation={handleProjectMutation}> </Project>
           </section>
         )}
-      
     </div>
-    
     </Layout>  
   )
 }
