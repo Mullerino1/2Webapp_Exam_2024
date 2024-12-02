@@ -30,8 +30,9 @@ function handleRemove() {
 }
 return (
     <button onClick={handleRemove}
-    disabled={deleting}>
-        {deleting? 'removing' : 'Delete course'}
+    disabled={deleting}
+    className="bg-red-500 text-white px-4 rounded">
+        {deleting? 'removing' : 'X'}
     </button>
 )
 

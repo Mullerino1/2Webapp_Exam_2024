@@ -87,7 +87,10 @@ export default function Courses() {
                 key={course.id}
                 data-testid="course_wrapper"
               >
-                <span className="block text-right capitalize">
+                 <span className="block text-right capitalize">
+                <DeleteCourse courseId={course.id} />
+                </span>
+                <span className="block text-left capitalize">
                   [{course.category}]
                 </span>
                 <h3
@@ -108,8 +111,9 @@ export default function Courses() {
                   href={`/courses/${course.slug}`}
                 >
                   Til kurs
+
                 </Link>
-                <DeleteCourse courseId={course.id} />
+               
               </article>
             ))
           ) : (
