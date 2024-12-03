@@ -16,8 +16,8 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
     initialFields: { 
       // title: ticket?.title ?? "",
       email: ticket?.email ?? "",
-      number: ticket?.number ?? "",
-      people: ticket?.people ?? "1",
+      phonenumber: ticket?.number ?? "",
+      people: ticket?.people ?? "",
       name: ticket?.name ?? "",
   
     },
@@ -25,8 +25,8 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
     validate: {
       name: (_, value) => value.length >= 2,
       email: (_, value) => value.length >= 5, 
-      number: (_, value) => value.length >= 8,
-      people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT as I was unsure as to hwo to set this up
+      phonenumber: (_, value) => value.length >= 8,
+      people: (_, value) => /^[0-9]$|^10$/.test(value), //ChatGPT as I was unsure as to hwo to set this up
       
      
     },
@@ -40,7 +40,7 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
   }
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
     <section className="YourTicket" data-testid="ticket-idea">
       <h3>{ labels.add.title}</h3>
       
@@ -70,13 +70,13 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
           />
         </div>
         <div>
-          <label htmlFor="number">Tlf:</label>
+          <label htmlFor="phonenumber">Tlf:</label>
           <input
-            id="number"
+            id="phonenumber"
             type="text"
-            name="number"
+            name="phonenumber"
             placeholder="Your phone number"
-            {...getFieldProps("number")}
+            {...getFieldProps("phonenumber")}
           />
         </div>  
 

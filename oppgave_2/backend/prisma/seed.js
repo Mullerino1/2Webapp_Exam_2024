@@ -45,7 +45,6 @@ async function main() {
             name: "Martine!",
             phonenumber: "12345678",
             email: "Martine@hiof.no",
-            event_id: 1,
             approved: "Approved"
         },
         {
@@ -53,7 +52,6 @@ async function main() {
             name: "Kim!",
             phonenumber: "12345678",
             email: "Kim@hiof.no",
-            event_id: 1,
             approved: "Denied"
         }
     

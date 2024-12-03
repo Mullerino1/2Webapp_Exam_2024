@@ -73,22 +73,23 @@ app.post(eventslink, async (c) => {
 
 app.post(customerslink, async (c) => {
   const customer = await c.req.json();  
+  console.log(customer)
   const customerData = {
   name: customer['name'],
   phonenumber: customer['phonenumber'],
   email: customer['email'],
   event_id: customer['event_id']
   }
-  
+  console.log(customerData)
   try {
+    
     const newUsers = await prisma.customers.create({
       data: {
-        id: Date.now(),
         name: customerData.name,
-        phonenumber: customerData.phonenumber,
+        phonenumber: customerData.phonenumber as string,
         email: customerData.email,
         event_id: customerData.event_id,
-        approved: false
+        approved: "Waiting"
       }
     })
   

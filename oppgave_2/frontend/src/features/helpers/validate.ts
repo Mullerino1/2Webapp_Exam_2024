@@ -12,7 +12,7 @@ const ticketSchema = z.object({
     date: z.string().datetime(),
     slug: z.string(),
     email: z.string(),
-    number: z.string(),
+    phonenumber: z.string(),
     people: z.string(),
     name: z.string(),
   

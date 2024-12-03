@@ -17,7 +17,5 @@ CREATE TABLE "Customers" (
     "name" TEXT NOT NULL,
     "phonenumber" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "event_id" INTEGER NOT NULL,
-    "approved" TEXT NOT NULL,
-    CONSTRAINT "Customers_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "Events" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "approved" TEXT NOT NULL
 );

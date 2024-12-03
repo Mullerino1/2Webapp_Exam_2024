@@ -21,7 +21,7 @@ model Events {
   seats            Int
   waiting_list     Boolean
 
-  customers             Customers[]   @relation("EventCustomers")  // Defines the one-to-many relation with Tags
+  //customers             Customers[]   @relation("EventCustomers")  // Defines the one-to-many relation with Tags
 }
 
 model Customers {
@@ -29,8 +29,8 @@ id                Int @id @default(autoincrement())
 name              String
 phonenumber       String
 email             String
-event_id          Int
+//event_id          Int
 approved          String
 
-event   Events @relation(fields: [event_id], references: [id], name: "EventCustomers", onDelete: Cascade)
+//event   Events @relation(fields: [event_id], references: [id], name: "EventCustomers", onDelete: Cascade)
 }

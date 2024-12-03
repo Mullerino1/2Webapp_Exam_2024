@@ -74,11 +74,11 @@ export function useTickets(){
 
   const add = async (data: Partial<TicketType>) => {
     console.log(data + '2')
-    const { title = "", description = "", name = "", email = "", number = "", people = ""}  = data
+    const { title = "", description = "", name = "", email = "", phonenumber = "", people = ""}  = data
 
     try {
       setStatus("loading")
-      await projectApi.create({ title, description, name, email, number, people})
+      await projectApi.create({ title, description, name, email, phonenumber, people})
       await fetchData()
       setStatus("success")
     } catch (error) {

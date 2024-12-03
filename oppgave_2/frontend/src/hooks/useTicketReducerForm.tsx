@@ -116,7 +116,10 @@ const [state, dispatch] = useReducer(
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const isFormValid = Object.values(state).every((field) => field.isValid);
+    const requiredfields = ['name', 'email', 'phonenumber', 'people']
+    const isFormValid = requiredfields.every(field =>
+      state[field as keyof T].isValid
+    )
     if (!isFormValid) return;
 
     const formData = Object.fromEntries(
