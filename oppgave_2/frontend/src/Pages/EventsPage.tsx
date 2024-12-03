@@ -8,6 +8,18 @@ import {categories, events } from "../data/data";
 import { ofetch } from "ofetch";
 import { URLS } from "@/config/urls";
 
+interface Event {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  date: object;
+  location: string;
+  type: string;
+  seats: number;
+  waiting_list: boolean
+}
+
 let initialized = false;
 
 const getEvents = async () => {
@@ -18,7 +30,7 @@ const getEvents = async () => {
   
 export default function Events() {
     const [value, setValue] = useState("");
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Event[]>([]);
   
     const handleFilter = async (event) => {
       const type = event.target.value;

@@ -14,14 +14,26 @@ import React, { useEffect, useState } from 'react';
 import { URLS } from '@/config/urls';
 import { ofetch } from 'ofetch';
 
+interface Event {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+  date: object;
+  location: string;
+  type: string;
+  seats: number;
+  waiting_list: boolean
+}
+
 //Slug setup was mainly found from this website https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes and form the class courses
 
 let initialized = false;
 
 const getEvent = async (slug) => {
     const data = await ofetch(URLS.events)
-    const event = await data.filter((event) => event.slug === slug);
-    return event?.[0];
+    const event = data.data.filter((event) => event.slug === slug);
+    return event.data;
   };
   
 
@@ -31,7 +43,7 @@ export default function EventPage() {
   const { slug } = router.query
   const arrangementSlug = "";
   const { add, status, get, data, error } = useTicket();
-  const [event, setEvent] = useState()
+  const [event, setEvent] = useState<Event[]>([]);
   const tickets = data;
 
   if (!event) {
