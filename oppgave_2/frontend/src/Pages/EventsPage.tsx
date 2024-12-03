@@ -17,7 +17,8 @@ interface Event {
   location: string;
   type: string;
   seats: number;
-  waiting_list: boolean
+  waiting_list: boolean,
+  full: boolean
 }
 
 let initialized = false;
@@ -181,6 +182,8 @@ export default function Events() {
                 </h3>
                 <p>
                   {event.description}
+                  <br/>
+                  Full: {event.full.toString()}
                 </p>
                 <Link href={`/events/${event.slug}`}>
                   To Event

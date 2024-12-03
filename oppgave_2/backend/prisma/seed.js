@@ -52,7 +52,7 @@ async function main() {
             phonenumber: "12345678",
             email: "Martine@hiof.no",
             approved: "Approved",
-            people: "2"
+            people: 2
         },
         {
             id: 2,
@@ -60,7 +60,7 @@ async function main() {
             phonenumber: "12345678",
             email: "Kim@hiof.no",
             approved: "Denied",
-            people: "5"
+            people: 5
         }
     
             ]

@@ -58,7 +58,8 @@ app.post(eventslink, async (c) => {
         type: event.type,
         seats: event.seats,
         price: event.price,
-        waiting_list: event.waiting_list
+        waiting_list: event.waiting_list,
+        full: false
       }
     })  
 
@@ -78,7 +79,8 @@ app.post(customerslink, async (c) => {
   name: customer['name'],
   phonenumber: customer['phonenumber'],
   email: customer['email'],
-  event_id: customer['event_id']
+  event_id: customer['event_id'],
+  people: customer['people']
   }
   console.log(customerData)
   try {
@@ -89,7 +91,8 @@ app.post(customerslink, async (c) => {
         phonenumber: customerData.phonenumber as string,
         email: customerData.email,
         event_id: customerData.event_id,
-        approved: "Waiting"
+        approved: "Waiting",
+        people: customerData.people
       }
     })
   
