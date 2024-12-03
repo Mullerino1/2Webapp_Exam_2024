@@ -17,7 +17,7 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
       // title: ticket?.title ?? "",
       email: ticket?.email ?? "",
       phonenumber: ticket?.number ?? "",
-      people: ticket?.people ?? "",
+      people: ticket?.people ?? "1",
       name: ticket?.name ?? "",
   
     },
