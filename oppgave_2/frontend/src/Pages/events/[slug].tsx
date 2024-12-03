@@ -1,10 +1,8 @@
 "use client"
 
-
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import Layout from '@/layout/Layout';
-import { events, users } from '@/data/data';
 import "@/styles/css/main.css"
 import Arrangement from '../ArrangementPage';
 import Tickets from "@/components/Tickets";
@@ -23,41 +21,47 @@ interface Event {
   location: string;
   type: string;
   seats: number;
+  price?: number;
   waiting_list: boolean
 }
 
-//Slug setup was mainly found from this website https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes and form the class courses
-
-let initialized = false;
-
-const getEvent = async (slug) => {
-    const data = await ofetch(URLS.events)
-    const event = data.data.filter((event) => event.slug === slug);
-    return event.data;
-  };
-  
-
+const getEvent = async (slug: string) => {
+  try {
+    const response = await ofetch(URLS.events);
+    const event = response.data.find((event) => event.slug === slug);
+    return event;
+  } catch (error) {
+    console.error('Failed to fetch event:', error);
+    return null;
+  }
+};
 
 export default function EventPage() {
-  const router = useRouter()
-  const { slug } = router.query
-  const arrangementSlug = "";
+  const router = useRouter();
+  const { slug } = router.query;
   const { add, status, get, data, error } = useTicket();
-  const [event, setEvent] = useState<Event[]>([]);
+  const [event, setEvent] = useState<Event | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const tickets = data;
 
-  if (!event) {
-    return <div>Event not found</div>
-  }
+  const arrangementSlug = ""; // You might want to define this differently
 
   useEffect(() => {
-    if (!slug || initialized) return;
-    initialized = true;
+    if (!slug) return;
+
     const fetchData = async () => {
-      const data = await getEvent(slug as string);
-      console.log(data)
-      setEvent(data);
+      setIsLoading(true);
+      try {
+        const fetchedEvent = await getEvent(slug as string);
+        setEvent(fetchedEvent);
+      } catch (error) {
+        console.error('Error fetching event:', error);
+        setEvent(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
+
     fetchData();
   }, [slug]);
 
@@ -70,58 +74,48 @@ export default function EventPage() {
         break;
     }
   };
-  /*
-  const addTicketServer = async (id: string) => {
-    try {
-      return fetch("http://localhost:4000", {
-        method: "POST",
-        body: JSON.stringify({
-          note: "",
-          projectId: id,
-        }),
-      });
-    } catch (error) {
-      console.error(error);
-    }
+
+  // Claude helped with render problems, Handle loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  */
-  if (!slug) return (
-    <>
-    Loading...
-    </>
-  )
+
+  // Handle case where no event is found
+  if (!event) {
+    return <div>Event not found</div>;
+  }
 
   return ( 
     <Layout>
-    <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
-    <aside className="border-r border-slate-200 pr-6">
+      <div className="grid grid-cols-[250px_minmax(20%,1fr)_1fr] gap-16">
+        <aside className="border-r border-slate-200 pr-6">
           <Link href={`/EventsPage`}>
-              <h3 className="mb-4 text-base font-bold">Events</h3>
+            <h3 className="mb-4 text-base font-bold">Events</h3>
           </Link>
         </aside>
         {arrangementSlug ? (
-      <article>
+          <article>
             <Arrangement />
           </article>    
         ) : (
           <section>
-              <h2 className="text-2xl font-bold" data-testid="course_title">
-                {event.title}
-              </h2>
-              <section className='EventInformation'>
+            <h2 className="text-2xl font-bold" data-testid="course_title">
+              {event.title}
+            </h2>
+            <section className='EventInformation'>
               <h4>[{event.type}]</h4>
               <p>the price is {event.price}, we have {event.seats} seats</p>
               <p>{event.location}</p>
               <p
                 className="mt-4 font-semibold leading-relaxed"
-                data-testid="course_description" >
+                data-testid="course_description">
                 {event.description}
               </p>
-              </section>
-              <Tickets tickets={tickets} handleTicketMutation={handleTicketMutation}> </Tickets>
+            </section>
+            <Tickets tickets={tickets} handleTicketMutation={handleTicketMutation}> </Tickets>
           </section>
         )}
-    </div>
+      </div>
     </Layout>  
   )
 }
