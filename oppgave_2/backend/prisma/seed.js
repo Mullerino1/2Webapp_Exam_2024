@@ -12,6 +12,7 @@ async function main() {
         location: "Oslo",
         type: "Concert",
         seats: 69,
+        price: '666',
         waiting_list: true
         },
         {
@@ -23,6 +24,7 @@ async function main() {
         location: "Fredrikstad",
         type: "Marathon",
         seats: 1000,
+        price: `500`,
         waiting_list: false
         },
         {
@@ -34,6 +36,7 @@ async function main() {
         location: "Bærum",
         type: "Social Event",
         seats: 1000,
+        price: '0',
         waiting_list: false
         }
         ]

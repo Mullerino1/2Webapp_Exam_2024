@@ -23,7 +23,6 @@ serve({
 app.get(eventslink, async (c) => {
   try {
     const events = await prisma.events.findMany();
-
     if (events.length > 0) {
       return c.json({ success: true, data: events }, 200);
     } else {
@@ -45,19 +44,20 @@ app.post(eventslink, async (c) => {
   location : event['location'],
   type: event['type'],
   seats: event ['seats'],
+  price: event ['price'] as string,
   waiting_list: event ['waiting_list']
   }
   
   try {
     const newEvent = await prisma.events.create({
       data: {
-        id: `${Date.now()}`,
         title: event.title,
         slug: event.slug,
         date: event.date,
         location: event.location,
         type: event.type,
         seats: event.seats,
+        price: event.price,
         waiting_list: event.waiting_list
       }
     })  

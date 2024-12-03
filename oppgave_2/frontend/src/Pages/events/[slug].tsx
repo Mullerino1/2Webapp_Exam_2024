@@ -54,6 +54,7 @@ export default function EventPage() {
       try {
         const fetchedEvent = await getEvent(slug as string);
         setEvent(fetchedEvent);
+        console.log(event)
       } catch (error) {
         console.error('Error fetching event:', error);
         setEvent(null);
@@ -104,7 +105,8 @@ export default function EventPage() {
             </h2>
             <section className='EventInformation'>
               <h4>[{event.type}]</h4>
-              <p>the price is {event.price}, we have {event.seats} seats</p>
+              <p>the price is {event.price}, we have {event.seats} seats, 
+                and it happens on {JSON.parse(event.date)['day']}.{JSON.parse(event.date)['month']}.{JSON.parse(event.date)['year']}</p>
               <p>{event.location}</p>
               <p
                 className="mt-4 font-semibold leading-relaxed"

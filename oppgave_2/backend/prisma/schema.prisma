@@ -19,6 +19,7 @@ model Events {
   location         String
   type             String
   seats            Int
+  price            String
   waiting_list     Boolean
 
   //customers             Customers[]   @relation("EventCustomers")  // Defines the one-to-many relation with Tags

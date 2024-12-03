@@ -39,6 +39,7 @@ export default function Events() {
         const events = await getEvents();
         const content = events.filter((event) =>
           event.type.toLocaleLowerCase().includes(type.toLowerCase())
+        
         );
         setData(content);
       } else {

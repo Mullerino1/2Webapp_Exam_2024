@@ -8,6 +8,7 @@ CREATE TABLE "Events" (
     "location" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "seats" INTEGER NOT NULL,
+    "price" TEXT NOT NULL,
     "waiting_list" BOOLEAN NOT NULL
 );
 
