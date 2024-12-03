@@ -1,0 +1,111 @@
+
+
+
+
+body {
+  background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+
+h1, h2, h3 {
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+
+a {
+  color: #03DAC6;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+
+
+header nav {
+  position: center;
+}
+
+header nav ul {
+  list-style: none;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+nav{
+  text-align: center;
+  background-color: #121212;
+  padding: 5px;
+  margin: 3px;
+}
+
+header {
+  text-align: justify;
+}
+
+
+
+header h1{
+  text-align: center;
+}
+
+
+main article{
+  background-color: #121212;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+.EventInformation{
+  background-color: #353535;
+  padding: 5px;
+}
+
+.YourTicket{
+  background-color: #353535;
+}
+
+
+
+main p {
+  margin: 15px 0;
+}
+
+footer {
+  background-color: #1E1E1E;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+footer a {
+  color: #03DAC6;
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+      margin-left: 250px;
+  }
+  .side-nav {
+      width: 250px;
+      height: 100%;
+      position: fixed;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  }
+  .menu-button {
+      display: none;
+  }
+}
+
+
+
+
+
