@@ -69,20 +69,20 @@ app.get(courseslink, async (c) => {
 
     //Løste med chatgpt, men prøver å forstå så godt jeg kan
     const data = courses.map(course => ({
-      ...course, // Spread the individual `course` object
+      ...course, 
       lessons: course.lessons.map(lesson => ({
         id: lesson.id,
         slug: lesson.slug,
         title: lesson.title,
         description: lesson.description,
         text: lesson.text,
-      })),  // Extract necessary fields from lessons
+      })),  
     }));
 
     if (data.length > 0) {
       return c.json({ success: true, data: data }, 200);
     } else {
-      return c.json({ success: true, data: [] }, 204); // Return empty array if no courses
+      return c.json({ success: true, data: [] }, 204); 
     }
   } catch (err) {
     console.error(`Error writing to database`, err);
@@ -145,7 +145,7 @@ app.patch(courseslink, async (c) =>
       id: c.req.query('id'),
       category: c.req.query('category')
     }
-    //visible is to contain the state of public
+    
   if (courseData.id != undefined) {
     try {
       patchCourseSchema.parse(courseData);
@@ -204,9 +204,10 @@ app.get(lessonslink, async (c) => {
         comments: true,
         },
     });
+    //Chatgpt ble brukt for å hjelpe til med å lage følgende
     const data = lessons.map(lesson => ({
       ...lessons,
-      comments: lesson.comments.map(comment => comment.comment),  // Convert tags to an array of strings
+      comments: lesson.comments.map(comment => comment.comment),
     }));
     console.log(data);
     if (data.size() > 0) {return c.json({success: true, data: data}, 200);}

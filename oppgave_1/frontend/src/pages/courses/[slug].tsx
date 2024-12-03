@@ -52,6 +52,7 @@ export default function CoursePage() {
   const [course, setCourse] = useState<Course | null>(null);
   const [lessonSlug, setLessonSlug] = useState("");
 
+  //AI måtte hjelpe til med å forstå slugs
   useEffect(() => {
     if (!slug || initialized) return;
     initialized = true;

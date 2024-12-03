@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ofetch } from "ofetch";
 import { baseUrl, endpoints } from "@/lib/config/urls";
 
-import { categories } from "../data/data";  // Assuming you have categories available
+import { categories } from "../data/data";
 import DeleteCourse from "@/components/DeleteCourse";
 
 interface Course {
@@ -33,7 +33,7 @@ export default function Courses() {
   const [value, setValue] = useState("");
   const [data, setData] = useState<Course[]>([]);
 
-  // First useEffect to fetch data
+  //AI was used to help with making some useEffects
   useEffect(() => {
     if (!initialized) {
       initialized = true;
