@@ -1,0 +1,111 @@
+//Code is mainly from previous deliveries and class/courses
+
+"use client"
+
+
+import { useCallback, useEffect, useState } from "react";
+import type { Ticket as TicketType } from "@/components/Types";
+import projectApi from "@/lib/services/api"
+import { ofetch } from "ofetch";
+import { URLS } from "@/config/urls";
+
+
+
+type Status = "idle" | "loading" | "error" | "success" | "fetching"
+
+export function useTickets(){
+  const [status, setStatus] = useState<Status>("idle")
+  const [data, setData] = useState<TicketType[]>([])
+  
+  const [error, setError] = useState<string | null>(null)
+
+  const isFetching = status === "fetching"
+  const isLoading = status === "loading" || isFetching
+  const isError = status === "error" || !!error
+  const isIdle = status === "idle"
+  const isSuccess = status === "success"
+
+  let initialized = false
+
+
+  useEffect(() => {
+    if (!initialized) {
+      initialized = true
+    const fetchData = async () => {
+      try {
+        const response = await ofetch(URLS.events)
+        const data = response
+        setData(data.data)
+      } catch (error) {
+        console.error("Error fetching data from server", error)
+      }
+    }
+    fetchData()
+  }
+  }, [])
+
+
+  const resetToIdle = useCallback(
+    (timeout = 2000) => 
+      setTimeout(() => {
+        setStatus("idle")
+      }, timeout),
+      []
+  )
+
+  /*
+   const fetchData = useCallback( async () => {
+    try {
+      setStatus("loading")
+      const result = await projectApi.listProjects()
+      //possibly dont need parts in this code as we dont need to be listing the tickets anywhere else then havign them saved in the backend
+      //Kim - Saving for next level step then
+      setData(result?.data ?? [])
+
+      setStatus("success")
+    } catch (error) {
+    setError("failed when fetching data")
+  } finally {
+    resetToIdle()
+  }
+}, [resetToIdle])
+*/
+
+
+  const add = async (data: Partial<TicketType>) => {
+    console.log(data + '2')
+    const { title = "", description = "", name = "", email = "", phonenumber = "", people = ""}  = data
+
+    try {
+      setStatus("loading")
+      await projectApi.create({ title, description, name, email, phonenumber, people})
+      await fetchData()
+      setStatus("success")
+    } catch (error) {
+      setStatus("error")
+      setError("failed to create project")
+    } finally {
+      resetToIdle
+    }
+  }
+
+
+
+  return {
+    add,
+    get: data,
+    data,
+    error,
+    status: {
+      idle: isIdle,
+      loading: isLoading,
+      success: isSuccess,
+      error: isError,
+      fetching: isFetching,
+    },
+    }
+  }
+
+  export default useTickets
+ 
+
