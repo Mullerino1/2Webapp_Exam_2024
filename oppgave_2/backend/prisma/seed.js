@@ -13,7 +13,8 @@ async function main() {
         type: "Concert",
         seats: 69,
         price: '666',
-        waiting_list: true
+        waiting_list: true,
+        full: true
         },
         {
         id: 2,
@@ -25,7 +26,8 @@ async function main() {
         type: "Marathon",
         seats: 1000,
         price: `500`,
-        waiting_list: false
+        waiting_list: false,
+        full: false
         },
         {
         id: 3,
@@ -37,7 +39,8 @@ async function main() {
         type: "Social Event",
         seats: 1000,
         price: '0',
-        waiting_list: false
+        waiting_list: false,
+        full: false
         }
         ]
     })
@@ -48,14 +51,16 @@ async function main() {
             name: "Martine!",
             phonenumber: "12345678",
             email: "Martine@hiof.no",
-            approved: "Approved"
+            approved: "Approved",
+            people: "2"
         },
         {
             id: 2,
             name: "Kim!",
             phonenumber: "12345678",
             email: "Kim@hiof.no",
-            approved: "Denied"
+            approved: "Denied",
+            people: "5"
         }
     
             ]
