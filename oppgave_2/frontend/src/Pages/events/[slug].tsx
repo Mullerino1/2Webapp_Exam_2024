@@ -80,7 +80,7 @@ export default function EventPage() {
     return <div>Loading...</div>;
   }
 
-  // Handle case where no event is found
+  // Claude recognized that this was to high up, a problem we previously had, and failed to recognize.
   if (!event) {
     return <div>Event not found</div>;
   }

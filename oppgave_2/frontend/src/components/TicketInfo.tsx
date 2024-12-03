@@ -23,9 +23,9 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
     },
     onSubmit: (data) => onSubmit(ticket?.title, data),
     validate: {
-      name: (_, value) => value.length > 2,
-      email: (_, value) => value.length > 5, 
-      number: (_, value) => value.length > 8,
+      name: (_, value) => value.length >= 2,
+      email: (_, value) => value.length >= 5, 
+      number: (_, value) => value.length >= 8,
       people: (_, value) => /^[1-9]$|^10$/.test(value), //ChatGPT as I was unsure as to hwo to set this up
       
      
@@ -40,9 +40,10 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
   }
 
   return (
+    <form className="form">
     <section className="YourTicket" data-testid="ticket-idea">
       <h3>{ labels.add.title}</h3>
-      <form onSubmit={handleSubmit}>
+      
         <div className="title field">
           <label htmlFor="title">Your Full Name</label>
           <input
@@ -103,7 +104,8 @@ export default function TicketForm(props: Readonly<TicketIdeaProps>) {
             { labels.add.submit}
           </button>
         </div>
-      </form>
+      
     </section>
+    </form>
   )
 }

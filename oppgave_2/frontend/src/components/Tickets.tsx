@@ -24,12 +24,8 @@ export default function Tickets(
 
   return (
     <>
-      <form className="form">
-        <section className="YourTicket">
-         
-        </section> 
-      </form>
-      <TicketForm onSubmit={onSubmit}/>
+        <TicketForm onSubmit={onSubmit}/>
+      
     </>
   )
 }
