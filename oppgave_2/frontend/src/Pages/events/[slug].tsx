@@ -7,9 +7,9 @@ import Layout from '@/layout/Layout';
 import { events, users } from '@/data/data';
 import "@/styles/css/main.css"
 import Arrangement from '../ArrangementPage';
-import Project from "@/components/Tickets";
+import Tickets from "@/components/Tickets";
 import useTicket from '@/hooks/useTickets';
-import type { HandleProject, Ticket as ProjectType } from "@/components/Types";
+import type { HandleTicket, Ticket as TicketType } from "@/components/Types";
 import React, { useEffect, useState } from 'react';
 import { URLS } from '@/config/urls';
 import { ofetch } from 'ofetch';
@@ -31,7 +31,7 @@ export default function EventPage() {
   const { slug } = router.query
   const arrangementSlug = "";
   const { add, status, get, data, error } = useTicket();
-  const [event, setEvent] = useState("")
+  const [event, setEvent] = useState()
   const tickets = data;
 
   if (!event) {
@@ -49,7 +49,7 @@ export default function EventPage() {
     fetchData();
   }, [slug]);
 
-  const handleProjectMutation: HandleProject = (props) => {
+  const handleTicketMutation: HandleTicket = (props) => {
     const { action } = props;
 
     switch (action) {
@@ -58,7 +58,7 @@ export default function EventPage() {
         break;
     }
   };
-
+  /*
   const addTicketServer = async (id: string) => {
     try {
       return fetch("http://localhost:4000", {
@@ -72,7 +72,7 @@ export default function EventPage() {
       console.error(error);
     }
   }
-  
+  */
   if (!slug) return (
     <>
     Loading...
@@ -97,7 +97,7 @@ export default function EventPage() {
                 {event.title}
               </h2>
               <section className='EventInformation'>
-              <h4>[{event.category}]</h4>
+              <h4>[{event.type}]</h4>
               <p>the price is {event.price}, we have {event.seats} seats</p>
               <p>{event.location}</p>
               <p
@@ -106,7 +106,7 @@ export default function EventPage() {
                 {event.description}
               </p>
               </section>
-              <Project tickets={tickets} handleProjectMutation={handleProjectMutation}> </Project>
+              <Tickets tickets={tickets} handleTicketMutation={handleTicketMutation}> </Tickets>
           </section>
         )}
     </div>

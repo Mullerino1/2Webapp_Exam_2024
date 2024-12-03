@@ -21,12 +21,12 @@ export default function Events() {
     const [data, setData] = useState([]);
   
     const handleFilter = async (event) => {
-      const category = event.target.value;
-      setValue(category);
-      if (category && category.length > 0) {
+      const type = event.target.value;
+      setValue(type);
+      if (type && type.length > 0) {
         const events = await getEvents();
         const content = events.filter((event) =>
-          event.category.toLocaleLowerCase().includes(category.toLowerCase())
+          event.type.toLocaleLowerCase().includes(type.toLowerCase())
         );
         setData(content);
       } else {
@@ -63,9 +63,9 @@ export default function Events() {
               onChange={handleFilter}
               className="min-w-[200px] rounded bg-slate-200">
               <option value="">All Events</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
+              {categories.map((type) => (
+                <option key={type} value={type}>
+                  {type}
                 </option>
               ))}
             </select>
@@ -76,7 +76,7 @@ export default function Events() {
             data.map((event) => (
               <article key={event.id}>
                 <span>
-                  [{event.category}]
+                  [{event.type}]
                 </span>
                 <h3>
                   <Link href={`/events/${event.slug}`}>{event.title}</Link>
